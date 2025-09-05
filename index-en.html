@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>R-SEC - Computer Networking & Security</title>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Varela+Round:wght@400&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<!-- Side Navigation Indicator -->
+		<nav class="side-nav-indicator">
+			<div class="side-nav-dot" data-section="home">
+				<span class="section-label">Home</span>
+			</div>
+			<div class="side-nav-dot" data-section="about">
+				<span class="section-label">About Us</span>
+			</div>
+			<div class="side-nav-dot" data-section="services">
+				<span class="section-label">IT Services</span>
+			</div>
+			<div class="side-nav-dot" data-section="audits">
+				<span class="section-label">Audits</span>
+			</div>
+			<div class="side-nav-dot" data-section="team">
+				<span class="section-label">Team</span>
+			</div>
+			<div class="side-nav-dot" data-section="training">
+				<span class="section-label">Training</span>
+			</div>
+			<div class="side-nav-dot" data-section="clients">
+				<span class="section-label">Our Clients</span>
+			</div>
+			<div class="side-nav-dot" data-section="contact">
+				<span class="section-label">Contact</span>
+			</div>
+		</nav>
+
+		<nav class="navbar">
+			<div class="nav-container">
+				<div class="logo">
+					<img src="R-Sec/logo.gif" alt="R-SEC Logo" />
+					<h2>R-SEC</h2>
+				</div>
+				<ul class="nav-menu">
+					<li><a href="#home" class="nav-link">Home</a></li>
+					<li><a href="#about" class="nav-link">About Us</a></li>
+					<li><a href="#services" class="nav-link">IT Services</a></li>
+					<li><a href="#audits" class="nav-link">Audits</a></li>
+					<li><a href="#team" class="nav-link">Team</a></li>
+					<li class="dropdown">
+						<a href="#training" class="nav-link dropdown-toggle">Training</a>
+						<ul class="dropdown-menu">
+							<li><a href="training-cybersecurity.html" class="dropdown-link">Cybersecurity Training</a></li>
+							<li><a href="training-marketing.html" class="dropdown-link">Marketing Training</a></li>
+						</ul>
+					</li>
+					<li><a href="#clients" class="nav-link">Our Clients</a></li>
+					<li><a href="#contact" class="nav-link">Contact</a></li>
+				</ul>
+				<div class="language-switcher">
+					<a href="index.html" class="lang-link">PL</a>
+					<span class="lang-separator">|</span>
+					<a href="index-en.html" class="lang-link active">EN</a>
+				</div>
+				<div class="hamburger">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+			</div>
+		</nav>
+
+		<main>
+			<section id="home" class="hero">
+				<div class="hero-content">
+					<div class="hero-logo">
+						<img src="R-Sec/r-sec.png" alt="R-SEC Computer Networking & Security" class="hero-logo-img" />
+					</div>
+					<h1>Computer Networking & Security</h1>
+					<p>
+						Professional data protection and IT support services for your
+						business
+					</p>
+					<div class="cta-buttons">
+						<a href="#contact" class="btn btn-primary">Contact Us</a>
+						<a href="#about" class="btn btn-secondary">Learn More</a>
+					</div>
+				</div>
+			</section>
+
+			<section id="about" class="about">
+				<div class="container">
+					<h2>About R-SEC Company</h2>
+					<p>
+						We are a team of cybersecurity specialists dealing with IT support and security audits. We help companies protect their data and IT systems.
+					</p>
+					<div class="features-grid">
+						<div class="feature">
+							<h3>Experience</h3>
+							<p>Years of experience in the cybersecurity industry</p>
+						</div>
+						<div class="feature">
+							<h3>Certifications</h3>
+							<p>Certified specialists with the highest qualifications</p>
+						</div>
+						<div class="feature">
+							<h3>24/7 Support</h3>
+							<p>Round-the-clock technical support for our clients</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="stats" class="stats">
+				<div class="container">
+					<div class="stats-grid">
+						<div class="stat-item">
+							<div class="stat-number" data-target="40">0</div>
+							<div class="stat-label">Satisfied clients</div>
+						</div>
+						<div class="stat-item">
+							<div class="stat-number" data-target="15">0</div>
+							<div class="stat-label">Recommendations</div>
+						</div>
+						<div class="stat-item">
+							<div class="stat-number" data-target="300" data-suffix="K">0</div>
+							<div class="stat-label">Cups of coffee</div>
+						</div>
+						<div class="stat-item">
+							<div class="stat-number" data-target="212">0</div>
+							<div class="stat-label">IT audits and penetration tests</div>
+						</div>
+						<div class="stat-item">
+							<div class="stat-number" data-target="80">0</div>
+							<div class="stat-label">Completed projects</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="services" class="services">
+				<div class="container">
+					<h2>Our Services</h2>
+					<div class="services-grid">
+						<div class="service-card">
+							<h3>CyberSec Compliance</h3>
+							<p>
+								We ensure compliance with cybersecurity regulations and
+								industry standards.
+							</p>
+						</div>
+						<div class="service-card">
+							<h3>IT Support Outsourcing</h3>
+							<p>
+								Comprehensive IT support for your company - from infrastructure to
+								help desk.
+							</p>
+						</div>
+						<div class="service-card">
+							<h3>High Availability Service Packages</h3>
+							<p>
+								We ensure the continuity of your systems with the highest
+								availability.
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="audits" class="audits">
+				<div class="container">
+					<h2>Security Audits</h2>
+					<p>
+						We conduct comprehensive IT security audits that help
+						identify and eliminate threats in your infrastructure.
+					</p>
+					<div class="audit-types">
+						<div class="audit-type">
+							<h4>Infrastructure Audit</h4>
+							<p>Network and system security assessment</p>
+						</div>
+						<div class="audit-type">
+							<h4>Application Audit</h4>
+							<p>Web application security testing</p>
+						</div>
+						<div class="audit-type">
+							<h4>Compliance Audit</h4>
+							<p>Verification of regulatory compliance</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="team" class="team">
+				<div class="container">
+					<h2>Our Team</h2>
+				</div>
+			</section>
+
+			<section class="team-member-section">
+				<div class="team-member-container">
+					<div class="team-member-large">
+						<div class="member-image">
+							<img src="R-Sec/118118Bobak.webp" alt="Wojciech Bobak" />
+						</div>
+						<div class="member-info">
+							<h3>Wojciech Bobak</h3>
+							<h4>CEO R-SEC, Cybersecurity and Digital Forensics Expert</h4>
+							<p>Cybersecurity and Digital Forensics Expert. I am an experienced IT Systems Administrator with many years of experience in the cybersecurity industry. I specialize in threat analysis, digital forensics and IT infrastructure protection.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="team-member-section alt">
+				<div class="team-member-container">
+					<div class="team-member-large reverse">
+						<div class="member-info">
+							<h3>Ewelina Bobak</h3>
+							<h4>CEO R-SEC, Social Engineering Specialist, Academic Lecturer</h4>
+							<p>Experienced expert in social engineering, cyberpsychology and creative thinking. Specializes in analyzing social threats in cybersecurity and education in security awareness.</p>
+						</div>
+						<div class="member-image">
+							<img src="R-Sec/Ewelina.webp" alt="Ewelina Bobak" />
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="team-member-section">
+				<div class="team-member-container">
+					<div class="team-member-large">
+						<div class="member-image">
+							<img src="R-Sec/Dorota.webp" alt="Dorota Sadowska" />
+						</div>
+						<div class="member-info">
+							<h3>Dorota Sadowska</h3>
+							<h4>Personal Data Protection Specialist</h4>
+							<p>Currently serves as Data Protection Inspector for local government units. Expert in compliance and GDPR regulations. Ensures compliance with data protection and information security regulations.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="team-member-section alt">
+				<div class="team-member-container">
+					<div class="team-member-large reverse">
+						<div class="member-info">
+							<h3>Łukasz Łaguna</h3>
+							<h4>Lawyer, Restructuring Advisor and Certified ISO 27001 Auditor</h4>
+							<p>Specialist in commercial law and cybersecurity. Certified auditor of information security management systems. Combines legal knowledge with practical experience in cybersecurity.</p>
+						</div>
+						<div class="member-image">
+							<img src="R-Sec/Łukasz.webp" alt="Łukasz Łaguna" />
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="team-member-section">
+				<div class="team-member-container">
+					<div class="team-member-large">
+						<div class="member-image">
+							<img src="R-Sec/Katarzyna.webp" alt="Katarzyna" />
+						</div>
+						<div class="member-info">
+							<h3>Katarzyna</h3>
+							<h4>IT Security Specialist</h4>
+							<p>Expert in the field of IT systems security and cybersecurity risk management. Specializes in implementing security solutions and analyzing system vulnerabilities.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="training" class="training">
+				<div class="container">
+					<h2>Training</h2>
+					<p>
+						We offer specialized cybersecurity training
+						for IT teams and managers.
+					</p>
+					<div class="training-grid">
+						<div class="training-item">
+							<h4>Security Awareness</h4>
+							<p>Employee training on cybersecurity basics</p>
+						</div>
+						<div class="training-item">
+							<h4>Incident Management</h4>
+							<p>Security incident response procedures</p>
+						</div>
+						<div class="training-item">
+							<h4>Compliance & Regulations</h4>
+							<p>Training on legal requirements and standards</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="clients" class="clients">
+				<div class="container">
+					<h2>Our Clients Trust Us</h2>
+					<p>We work with leading companies and institutions, providing the highest level of IT security.</p>
+					<div class="clients-grid">
+						<div class="client-item">
+							<div class="client-icon">🏢</div>
+							<h4>Enterprise Companies</h4>
+							<p>Large enterprises with advanced IT infrastructure</p>
+						</div>
+						<div class="client-item">
+							<div class="client-icon">🏛️</div>
+							<h4>Public Institutions</h4>
+							<p>Government offices and local government units</p>
+						</div>
+						<div class="client-item">
+							<div class="client-icon">🏥</div>
+							<h4>Medical Sector</h4>
+							<p>Medical facilities requiring the highest data security</p>
+						</div>
+						<div class="client-item">
+							<div class="client-icon">🏦</div>
+							<h4>Financial Sector</h4>
+							<p>Banks and financial institutions with rigorous requirements</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="contact" class="contact">
+				<div class="container">
+					<h2>Contact</h2>
+					<div class="contact-content">
+						<div class="contact-info">
+							<h3>Get in Touch</h3>
+							<p>We are ready to help secure your business</p>
+							<div class="contact-details">
+								<div class="contact-item">
+									<strong>Phone:</strong> +48 883 037 627
+								</div>
+								<div class="contact-item">
+									<strong>E-mail:</strong> biuro@r-sec.pl
+								</div>
+								<div class="contact-item">
+									<strong>Download PGP Key:</strong> <a href="#" class="pgp-link">Public Key</a>
+								</div>
+								<div class="contact-item address-section">
+									<strong>Address:</strong><br>
+									R-SEC Sp. z o.o.<br>
+									Nowy Sącz, ul. Grunwaldzka 17<br>
+									<span class="company-details">TAX ID: 7343659162</span><br>
+									<span class="company-details">REGON: 5423149480000</span>
+								</div>
+							</div>
+						</div>
+						<div class="contact-form">
+							<form id="contactForm">
+								<div class="form-group">
+									<input
+										type="text"
+										name="name"
+										placeholder="Full Name"
+										required
+									/>
+								</div>
+								<div class="form-group">
+									<input
+										type="email"
+										name="email"
+										placeholder="Email"
+										required
+									/>
+								</div>
+								<div class="form-group">
+									<input type="text" name="company" placeholder="Company" />
+								</div>
+								<div class="form-group">
+									<textarea
+										name="message"
+										rows="5"
+										placeholder="Message"
+										required
+									></textarea>
+								</div>
+								<button type="submit" class="btn btn-primary">
+									Send Message
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer class="footer">
+			<div class="container">
+				<div class="footer-content">
+					<div class="footer-section">
+						<h3>R-SEC</h3>
+						<p>Professional cybersecurity services</p>
+					</div>
+					<div class="footer-section">
+						<h4>Services</h4>
+						<ul>
+							<li><a href="#services">IT Support</a></li>
+							<li><a href="#audits">Audits</a></li>
+							<li><a href="#training">Training</a></li>
+						</ul>
+					</div>
+					<div class="footer-section">
+						<h4>Contact</h4>
+						<p>biuro@r-sec.pl</p>
+						<p>+48 883 037 627</p>
+					</div>
+				</div>
+				<div class="footer-bottom">
+					<p>&copy; 2024 R-SEC. All rights reserved.</p>
+				</div>
+			</div>
+		</footer>
+
+		<script src="script.js"></script>
+	</body>
+</html>

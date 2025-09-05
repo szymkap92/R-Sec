@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>R-SEC Academy - Platforma E-Learning</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Varela+Round:wght@400&display=swap"
+        rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="elearning.css" />
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="R-Sec/logo.gif" alt="R-SEC Logo" />
+                <h2>R-SEC Academy</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Strona główna</a></li>
+                <li><a href="#courses" class="nav-link">Kursy</a></li>
+                <li><a href="#progress" class="nav-link">Mój postęp</a></li>
+                <li><a href="#certificates" class="nav-link">Certyfikaty</a></li>
+                <li><a href="index.html#contact" class="nav-link">Kontakt</a></li>
+            </ul>
+            <div class="user-actions">
+                <button class="btn btn-secondary">Zaloguj się</button>
+                <button class="btn btn-primary">Rejestracja</button>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main style="padding-top: 80px;">
+        <!-- Hero Section -->
+        <section class="platform-hero">
+            <div class="hero-background"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <h1>🎓 R-SEC Academy</h1>
+                    <h2>Platforma E-Learning</h2>
+                    <p>Rozwijaj swoje umiejętności w cyberbezpieczeństwie i marketingu cyfrowym z najlepszymi ekspertami w branży</p>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-text">Kursów</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="stat-number">1200+</span>
+                            <span class="stat-text">Uczestników</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="stat-number">95%</span>
+                            <span class="stat-text">Satysfakcji</span>
+                        </div>
+                    </div>
+                    <a href="#courses" class="btn btn-primary btn-large">Rozpocznij naukę</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Course Categories -->
+        <section id="categories" class="course-categories">
+            <div class="container">
+                <h2>Kategorie kursów</h2>
+                <div class="category-filters">
+                    <button class="filter-btn active" data-category="all">Wszystkie</button>
+                    <button class="filter-btn" data-category="cybersecurity">🔒 Cyberbezpieczeństwo</button>
+                    <button class="filter-btn" data-category="marketing">📈 Marketing</button>
+                    <button class="filter-btn" data-category="technical">⚙️ Techniczne</button>
+                    <button class="filter-btn" data-category="management">👥 Zarządzanie</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Courses Grid -->
+        <section id="courses" class="courses-section">
+            <div class="container">
+                <h2>Dostępne kursy</h2>
+                <div class="courses-grid">
+                    
+                    <!-- Cybersecurity Courses -->
+                    <div class="course-card" data-category="cybersecurity" data-level="beginner">
+                        <div class="course-image">
+                            <div class="course-badge">BESTSELLER</div>
+                            <div class="course-level">Początkujący</div>
+                        </div>
+                        <div class="course-content">
+                            <h3>Podstawy Cyberbezpieczeństwa</h3>
+                            <p>Kompleksowy kurs wprowadzający w świat cyberbezpieczeństwa dla każdego</p>
+                            <div class="course-meta">
+                                <span class="course-duration">⏰ 8 godzin</span>
+                                <span class="course-lessons">📚 12 lekcji</span>
+                                <span class="course-students">👥 450 uczestników</span>
+                            </div>
+                            <div class="course-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text">0% ukończone</span>
+                            </div>
+                            <div class="course-price">
+                                <span class="price">299 PLN</span>
+                                <span class="original-price">399 PLN</span>
+                            </div>
+                            <button class="btn btn-primary course-btn">Zapisz się</button>
+                        </div>
+                    </div>
+
+                    <div class="course-card" data-category="cybersecurity" data-level="advanced">
+                        <div class="course-image">
+                            <div class="course-badge">NOWOŚĆ</div>
+                            <div class="course-level">Zaawansowany</div>
+                        </div>
+                        <div class="course-content">
+                            <h3>Testy Penetracyjne w Praktyce</h3>
+                            <p>Praktyczny kurs z testowania bezpieczeństwa aplikacji i infrastruktury IT</p>
+                            <div class="course-meta">
+                                <span class="course-duration">⏰ 16 godzin</span>
+                                <span class="course-lessons">📚 24 lekcje</span>
+                                <span class="course-students">👥 180 uczestników</span>
+                            </div>
+                            <div class="course-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text">0% ukończone</span>
+                            </div>
+                            <div class="course-price">
+                                <span class="price">899 PLN</span>
+                            </div>
+                            <button class="btn btn-primary course-btn">Zapisz się</button>
+                        </div>
+                    </div>
+
+                    <div class="course-card" data-category="cybersecurity" data-level="intermediate">
+                        <div class="course-image">
+                            <div class="course-level">Średni</div>
+                        </div>
+                        <div class="course-content">
+                            <h3>Zarządzanie Incydentami</h3>
+                            <p>Procedury reagowania na incydenty bezpieczeństwa i zarządzanie kryzysem</p>
+                            <div class="course-meta">
+                                <span class="course-duration">⏰ 10 godzin</span>
+                                <span class="course-lessons">📚 15 lekcji</span>
+                                <span class="course-students">👥 220 uczestników</span>
+                            </div>
+                            <div class="course-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 35%"></div>
+                                </div>
+                                <span class="progress-text">35% ukończone</span>
+                            </div>
+                            <div class="course-price">
+                                <span class="price">599 PLN</span>
+                            </div>
+                            <button class="btn btn-secondary course-btn">Kontynuuj</button>
+                        </div>
+                    </div>
+
+                    <!-- Marketing Courses -->
+                    <div class="course-card" data-category="marketing" data-level="beginner">
+                        <div class="course-image">
+                            <div class="course-badge">POPULAR</div>
+                            <div class="course-level">Początkujący</div>
+                        </div>
+                        <div class="course-content">
+                            <h3>Marketing Cyfrowy od Podstaw</h3>
+                            <p>Kompleksowe wprowadzenie do marketingu cyfrowego i social media</p>
+                            <div class="course-meta">
+                                <span class="course-duration">⏰ 12 godzin</span>
+                                <span class="course-lessons">📚 18 lekcji</span>
+                                <span class="course-students">👥 380 uczestników</span>
+                            </div>
+                            <div class="course-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text">0% ukończone</span>
+                            </div>
+                            <div class="course-price">
+                                <span class="price">449 PLN</span>
+                            </div>
+                            <button class="btn btn-primary course-btn">Zapisz się</button>
+                        </div>
+                    </div>
+
+                    <div class="course-card" data-category="marketing" data-level="advanced">
+                        <div class="course-image">
+                            <div class="course-level">Zaawansowany</div>
+                        </div>
+                        <div class="course-content">
+                            <h3>Marketing Automation</h3>
+                            <p>Automatyzacja procesów marketingowych i lead nurturing</p>
+                            <div class="course-meta">
+                                <span class="course-duration">⏰ 14 godzin</span>
+                                <span class="course-lessons">📚 20 lekcji</span>
+                                <span class="course-students">👥 150 uczestników</span>
+                            </div>
+                            <div class="course-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text">0% ukończone</span>
+                            </div>
+                            <div class="course-price">
+                                <span class="price">799 PLN</span>
+                            </div>
+                            <button class="btn btn-primary course-btn">Zapisz się</button>
+                        </div>
+                    </div>
+
+                    <div class="course-card" data-category="marketing" data-level="intermediate">
+                        <div class="course-image">
+                            <div class="course-level">Średni</div>
+                        </div>
+                        <div class="course-content">
+                            <h3>Google Analytics 4 w Praktyce</h3>
+                            <p>Analityka internetowa i pomiar skuteczności kampanii marketingowych</p>
+                            <div class="course-meta">
+                                <span class="course-duration">⏰ 8 godzin</span>
+                                <span class="course-lessons">📚 10 lekcji</span>
+                                <span class="course-students">👥 290 uczestników</span>
+                            </div>
+                            <div class="course-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 70%"></div>
+                                </div>
+                                <span class="progress-text">70% ukończone</span>
+                            </div>
+                            <div class="course-price">
+                                <span class="price">399 PLN</span>
+                            </div>
+                            <button class="btn btn-secondary course-btn">Kontynuuj</button>
+                        </div>
+                    </div>
+
+                    <!-- Technical Courses -->
+                    <div class="course-card" data-category="technical" data-level="intermediate">
+                        <div class="course-image">
+                            <div class="course-level">Średni</div>
+                        </div>
+                        <div class="course-content">
+                            <h3>Cloud Security - AWS</h3>
+                            <p>Bezpieczeństwo w chmurze AWS - konfiguracja i monitoring</p>
+                            <div class="course-meta">
+                                <span class="course-duration">⏰ 12 godzin</span>
+                                <span class="course-lessons">📚 16 lekcji</span>
+                                <span class="course-students">👥 120 uczestników</span>
+                            </div>
+                            <div class="course-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text">0% ukończone</span>
+                            </div>
+                            <div class="course-price">
+                                <span class="price">699 PLN</span>
+                            </div>
+                            <button class="btn btn-primary course-btn">Zapisz się</button>
+                        </div>
+                    </div>
+
+                    <div class="course-card" data-category="technical" data-level="advanced">
+                        <div class="course-image">
+                            <div class="course-badge">EKSPERT</div>
+                            <div class="course-level">Ekspert</div>
+                        </div>
+                        <div class="course-content">
+                            <h3>Kryptografia w Praktyce</h3>
+                            <p>Implementacja algorytmów kryptograficznych w systemach biznesowych</p>
+                            <div class="course-meta">
+                                <span class="course-duration">⏰ 20 godzin</span>
+                                <span class="course-lessons">📚 28 lekcji</span>
+                                <span class="course-students">👥 85 uczestników</span>
+                            </div>
+                            <div class="course-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text">0% ukończone</span>
+                            </div>
+                            <div class="course-price">
+                                <span class="price">1299 PLN</span>
+                            </div>
+                            <button class="btn btn-primary course-btn">Zapisz się</button>
+                        </div>
+                    </div>
+
+                    <!-- Management Courses -->
+                    <div class="course-card" data-category="management" data-level="intermediate">
+                        <div class="course-image">
+                            <div class="course-level">Średni</div>
+                        </div>
+                        <div class="course-content">
+                            <h3>Zarządzanie Zespołem IT</h3>
+                            <p>Skuteczne zarządzanie zespołami technicznymi i projektami IT</p>
+                            <div class="course-meta">
+                                <span class="course-duration">⏰ 10 godzin</span>
+                                <span class="course-lessons">📚 14 lekcji</span>
+                                <span class="course-students">👥 200 uczestników</span>
+                            </div>
+                            <div class="course-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text">0% ukończone</span>
+                            </div>
+                            <div class="course-price">
+                                <span class="price">549 PLN</span>
+                            </div>
+                            <button class="btn btn-primary course-btn">Zapisz się</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="platform-features">
+            <div class="container">
+                <h2>Dlaczego R-SEC Academy?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Praktyczne podejście</h3>
+                        <p>Każdy kurs zawiera praktyczne ćwiczenia i real-world case studies</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🏆</div>
+                        <h3>Certyfikaty</h3>
+                        <p>Otrzymuj uznawane w branży certyfikaty po ukończeniu kursów</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👨‍🏫</div>
+                        <h3>Eksperci w branży</h3>
+                        <p>Ucz się od praktyków z wieloletnim doświadczeniem</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3>Dostęp mobilny</h3>
+                        <p>Ucz się w dowolnym czasie i miejscu na każdym urządzeniu</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔄</div>
+                        <h3>Aktualne treści</h3>
+                        <p>Regularnie aktualizowane materiały zgodnie z trendami rynkowymi</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💬</div>
+                        <h3>Wsparcie 24/7</h3>
+                        <p>Pomoc techniczna i merytoryczna dostępna przez całą dobę</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>R-SEC Academy</h3>
+                    <p>Najlepsze kursy online z cyberbezpieczeństwa i marketingu</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Kursy</h4>
+                    <ul>
+                        <li><a href="#courses">Cyberbezpieczeństwo</a></li>
+                        <li><a href="#courses">Marketing cyfrowy</a></li>
+                        <li><a href="#courses">Zarządzanie</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontakt</h4>
+                    <p>biuro@r-sec.pl</p>
+                    <p>+48 883 037 627</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 R-SEC Academy. Wszystkie prawa zastrzeżone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="elearning.js"></script>
+</body>
+</html>
