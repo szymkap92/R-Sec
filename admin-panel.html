@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R-SEC Academy - Panel Administracyjny</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .admin-container {
+            display: flex;
+            min-height: 100vh;
+            background: var(--bg-primary);
+        }
+
+        .admin-sidebar {
+            width: 250px;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 2rem 1rem;
+            border-right: 1px solid var(--accent-color);
+        }
+
+        .admin-logo {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--accent-color);
+        }
+
+        .admin-logo h2 {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .admin-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .admin-nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .admin-nav a {
+            display: block;
+            padding: 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .admin-nav a:hover,
+        .admin-nav a.active {
+            background: var(--accent-color);
+            color: white;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+        }
+
+        .admin-main {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .admin-header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border: 1px solid var(--accent-color);
+        }
+
+        .admin-header h1 {
+            color: var(--secondary-color);
+            margin: 0 0 0.5rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--accent-color);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px var(--secondary-color);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .admin-section {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--accent-color);
+        }
+
+        .admin-section h2 {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--accent-color);
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--accent-color);
+        }
+
+        .admin-table th {
+            background: var(--accent-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        .admin-table td {
+            color: var(--text-secondary);
+        }
+
+        .admin-table tr:hover td {
+            background: rgba(255, 0, 0, 0.1);
+            color: white;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-active {
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+            border: 1px solid #00ff00;
+        }
+
+        .status-inactive {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff6b6b;
+            border: 1px solid #ff6b6b;
+        }
+
+        .status-published {
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+            border: 1px solid #00ff00;
+        }
+
+        .status-draft {
+            background: rgba(255, 165, 0, 0.2);
+            color: #ffa500;
+            border: 1px solid #ffa500;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            margin: 0 0.25rem;
+        }
+
+        .search-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: center;
+        }
+
+        .search-input,
+        .filter-select {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--accent-color);
+            color: white;
+            padding: 0.75rem;
+            border-radius: 8px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .pagination button {
+            padding: 0.5rem 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--accent-color);
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .pagination button:hover,
+        .pagination button.active {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            text-align: center;
+            color: var(--text-secondary);
+            padding: 2rem;
+        }
+
+        .error {
+            background: rgba(255, 0, 0, 0.1);
+            color: #ff6b6b;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ff6b6b;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .admin-container {
+                flex-direction: column;
+            }
+            
+            .admin-sidebar {
+                width: 100%;
+                padding: 1rem;
+            }
+            
+            .admin-nav ul {
+                display: flex;
+                overflow-x: auto;
+                gap: 0.5rem;
+            }
+            
+            .admin-nav li {
+                margin-bottom: 0;
+                min-width: 120px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .search-filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <h2>R-SEC Admin</h2>
+            </div>
+            
+            <nav class="admin-nav">
+                <ul>
+                    <li><a href="#dashboard" class="nav-link active" data-section="dashboard">Dashboard</a></li>
+                    <li><a href="#users" class="nav-link" data-section="users">Użytkownicy</a></li>
+                    <li><a href="#courses" class="nav-link" data-section="courses">Kursy</a></li>
+                    <li><a href="#enrollments" class="nav-link" data-section="enrollments">Zapisy</a></li>
+                    <li><a href="#activity" class="nav-link" data-section="activity">Aktywność</a></li>
+                    <li><a href="/" class="nav-link">Powrót do strony</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Dashboard Section -->
+            <div id="dashboard-section" class="admin-content active">
+                <div class="admin-header">
+                    <h1>Dashboard</h1>
+                    <p>Przegląd statystyk platformy R-SEC Academy</p>
+                </div>
+
+                <div class="stats-grid" id="stats-grid">
+                    <div class="loading">Ładowanie statystyk...</div>
+                </div>
+
+                <div class="admin-section">
+                    <h2>Najnowsza aktywność</h2>
+                    <div id="recent-activity">
+                        <div class="loading">Ładowanie aktywności...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Section -->
+            <div id="users-section" class="admin-content" style="display: none;">
+                <div class="admin-header">
+                    <h1>Zarządzanie użytkownikami</h1>
+                    <p>Przeglądaj i zarządzaj kontami użytkowników</p>
+                </div>
+
+                <div class="admin-section">
+                    <div class="search-filters">
+                        <input type="text" id="users-search" class="search-input" placeholder="Szukaj użytkowników...">
+                        <select id="users-role-filter" class="filter-select">
+                            <option value="">Wszystkie role</option>
+                            <option value="student">Student</option>
+                            <option value="instructor">Instruktor</option>
+                            <option value="admin">Administrator</option>
+                        </select>
+                        <button class="btn btn-secondary" onclick="loadUsers()">Filtruj</button>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="admin-table" id="users-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nazwa użytkownika</th>
+                                    <th>Email</th>
+                                    <th>Imię i nazwisko</th>
+                                    <th>Rola</th>
+                                    <th>Status</th>
+                                    <th>Zapisy</th>
+                                    <th>Data rejestracji</th>
+                                    <th>Akcje</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td colspan="9" class="loading">Ładowanie użytkowników...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination" id="users-pagination"></div>
+                </div>
+            </div>
+
+            <!-- Courses Section -->
+            <div id="courses-section" class="admin-content" style="display: none;">
+                <div class="admin-header">
+                    <h1>Zarządzanie kursami</h1>
+                    <p>Przeglądaj i zarządzaj kursami platformy</p>
+                </div>
+
+                <div class="admin-section">
+                    <div class="search-filters">
+                        <input type="text" id="courses-search" class="search-input" placeholder="Szukaj kursów...">
+                        <select id="courses-status-filter" class="filter-select">
+                            <option value="">Wszystkie statusy</option>
+                            <option value="published">Opublikowane</option>
+                            <option value="draft">Szkice</option>
+                        </select>
+                        <button class="btn btn-secondary" onclick="loadCourses()">Filtruj</button>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="admin-table" id="courses-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tytuł</th>
+                                    <th>Kategoria</th>
+                                    <th>Instruktor</th>
+                                    <th>Cena</th>
+                                    <th>Zapisy</th>
+                                    <th>Status</th>
+                                    <th>Data utworzenia</th>
+                                    <th>Akcje</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td colspan="9" class="loading">Ładowanie kursów...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination" id="courses-pagination"></div>
+                </div>
+            </div>
+
+            <!-- Activity Section -->
+            <div id="activity-section" class="admin-content" style="display: none;">
+                <div class="admin-header">
+                    <h1>Logi aktywności</h1>
+                    <p>Historia działań użytkowników na platformie</p>
+                </div>
+
+                <div class="admin-section">
+                    <div class="table-container">
+                        <table class="admin-table" id="activity-table">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Użytkownik</th>
+                                    <th>Akcja</th>
+                                    <th>Zasób</th>
+                                    <th>IP</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td colspan="5" class="loading">Ładowanie logów...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination" id="activity-pagination"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Global variables
+        let currentSection = 'dashboard';
+        let currentPage = {
+            users: 1,
+            courses: 1,
+            activity: 1
+        };
+
+        // API Configuration
+        const API_BASE = '/RSec/backend/api';
+
+        // Initialize admin panel
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeNavigation();
+            loadDashboard();
+        });
+
+        // Navigation
+        function initializeNavigation() {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    if (this.hasAttribute('data-section')) {
+                        e.preventDefault();
+                        const section = this.dataset.section;
+                        switchSection(section);
+                    }
+                });
+            });
+        }
+
+        function switchSection(section) {
+            // Update navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`[data-section="${section}"]`).classList.add('active');
+
+            // Update content
+            document.querySelectorAll('.admin-content').forEach(content => {
+                content.style.display = 'none';
+            });
+            document.getElementById(`${section}-section`).style.display = 'block';
+
+            currentSection = section;
+
+            // Load section data
+            switch(section) {
+                case 'dashboard':
+                    loadDashboard();
+                    break;
+                case 'users':
+                    loadUsers();
+                    break;
+                case 'courses':
+                    loadCourses();
+                    break;
+                case 'activity':
+                    loadActivity();
+                    break;
+            }
+        }
+
+        // Dashboard functions
+        async function loadDashboard() {
+            try {
+                const response = await fetch(`${API_BASE}/admin/dashboard-stats`);
+                const data = await response.json();
+
+                if (data.success) {
+                    displayStats(data.statistics);
+                } else {
+                    showError('Błąd podczas ładowania statystyk');
+                }
+            } catch (error) {
+                console.error('Dashboard error:', error);
+                showError('Błąd połączenia z serwerem');
+            }
+        }
+
+        function displayStats(stats) {
+            const statsGrid = document.getElementById('stats-grid');
+            
+            statsGrid.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-number">${stats.total_users || 0}</div>
+                    <div class="stat-label">Użytkownicy</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.total_courses || 0}</div>
+                    <div class="stat-label">Kursy</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.total_enrollments || 0}</div>
+                    <div class="stat-label">Zapisy</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${(stats.total_revenue || 0)} PLN</div>
+                    <div class="stat-label">Przychód</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.recent_enrollments || 0}</div>
+                    <div class="stat-label">Nowe zapisy (7 dni)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.completion_rate || 0}%</div>
+                    <div class="stat-label">Wskaźnik ukończenia</div>
+                </div>
+            `;
+        }
+
+        // Users functions
+        async function loadUsers(page = 1) {
+            const search = document.getElementById('users-search')?.value || '';
+            const role = document.getElementById('users-role-filter')?.value || '';
+            
+            try {
+                const params = new URLSearchParams({
+                    page: page,
+                    search: search,
+                    role: role
+                });
+
+                const response = await fetch(`${API_BASE}/admin/users?${params}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    displayUsers(data.users);
+                    displayPagination('users', data.pagination);
+                } else {
+                    showError('Błąd podczas ładowania użytkowników');
+                }
+            } catch (error) {
+                console.error('Users error:', error);
+                showError('Błąd połączenia z serwerem');
+            }
+        }
+
+        function displayUsers(users) {
+            const tbody = document.querySelector('#users-table tbody');
+            
+            if (users.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="9">Brak użytkowników</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = users.map(user => `
+                <tr>
+                    <td>${user.id}</td>
+                    <td>${user.username}</td>
+                    <td>${user.email}</td>
+                    <td>${user.first_name} ${user.last_name}</td>
+                    <td>${user.role}</td>
+                    <td>
+                        <span class="status-badge ${user.is_active ? 'status-active' : 'status-inactive'}">
+                            ${user.is_active ? 'Aktywny' : 'Nieaktywny'}
+                        </span>
+                    </td>
+                    <td>${user.total_enrollments}</td>
+                    <td>${new Date(user.created_at).toLocaleDateString('pl-PL')}</td>
+                    <td>
+                        <button class="btn btn-small btn-secondary" 
+                                onclick="toggleUserStatus(${user.id}, ${!user.is_active})">
+                            ${user.is_active ? 'Dezaktywuj' : 'Aktywuj'}
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Courses functions
+        async function loadCourses(page = 1) {
+            const search = document.getElementById('courses-search')?.value || '';
+            const status = document.getElementById('courses-status-filter')?.value || '';
+            
+            try {
+                const params = new URLSearchParams({
+                    page: page,
+                    search: search,
+                    status: status
+                });
+
+                const response = await fetch(`${API_BASE}/admin/courses-management?${params}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    displayCourses(data.courses);
+                    displayPagination('courses', data.pagination);
+                } else {
+                    showError('Błąd podczas ładowania kursów');
+                }
+            } catch (error) {
+                console.error('Courses error:', error);
+                showError('Błąd połączenia z serwerem');
+            }
+        }
+
+        function displayCourses(courses) {
+            const tbody = document.querySelector('#courses-table tbody');
+            
+            if (courses.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="9">Brak kursów</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = courses.map(course => `
+                <tr>
+                    <td>${course.id}</td>
+                    <td>${course.title}</td>
+                    <td>${course.category_name || 'Brak kategorii'}</td>
+                    <td>${course.instructor_first_name} ${course.instructor_last_name}</td>
+                    <td>${course.price} PLN</td>
+                    <td>${course.enrollment_count}</td>
+                    <td>
+                        <span class="status-badge ${course.is_published ? 'status-published' : 'status-draft'}">
+                            ${course.is_published ? 'Opublikowany' : 'Szkic'}
+                        </span>
+                    </td>
+                    <td>${new Date(course.created_at).toLocaleDateString('pl-PL')}</td>
+                    <td>
+                        <button class="btn btn-small btn-secondary" onclick="editCourse(${course.id})">
+                            Edytuj
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Activity functions
+        async function loadActivity(page = 1) {
+            try {
+                const params = new URLSearchParams({ page: page });
+                const response = await fetch(`${API_BASE}/admin/activity-logs?${params}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    displayActivity(data.logs);
+                    displayPagination('activity', data.pagination);
+                } else {
+                    showError('Błąd podczas ładowania logów aktywności');
+                }
+            } catch (error) {
+                console.error('Activity error:', error);
+                showError('Błąd połączenia z serwerem');
+            }
+        }
+
+        function displayActivity(logs) {
+            const tbody = document.querySelector('#activity-table tbody');
+            
+            if (logs.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5">Brak logów aktywności</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = logs.map(log => `
+                <tr>
+                    <td>${new Date(log.created_at).toLocaleString('pl-PL')}</td>
+                    <td>${log.first_name ? `${log.first_name} ${log.last_name}` : 'System'}</td>
+                    <td>${log.action}</td>
+                    <td>${log.resource_type || ''} ${log.resource_id || ''}</td>
+                    <td>${log.ip_address || ''}</td>
+                </tr>
+            `).join('');
+        }
+
+        // Pagination
+        function displayPagination(section, pagination) {
+            const container = document.getElementById(`${section}-pagination`);
+            
+            if (pagination.total_pages <= 1) {
+                container.innerHTML = '';
+                return;
+            }
+
+            let html = '';
+            
+            // Previous button
+            if (pagination.current_page > 1) {
+                html += `<button onclick="loadPage('${section}', ${pagination.current_page - 1})">Poprzednia</button>`;
+            }
+
+            // Page numbers
+            for (let i = 1; i <= pagination.total_pages; i++) {
+                if (i === pagination.current_page) {
+                    html += `<button class="active">${i}</button>`;
+                } else {
+                    html += `<button onclick="loadPage('${section}', ${i})">${i}</button>`;
+                }
+            }
+
+            // Next button
+            if (pagination.current_page < pagination.total_pages) {
+                html += `<button onclick="loadPage('${section}', ${pagination.current_page + 1})">Następna</button>`;
+            }
+
+            container.innerHTML = html;
+        }
+
+        function loadPage(section, page) {
+            currentPage[section] = page;
+            
+            switch(section) {
+                case 'users':
+                    loadUsers(page);
+                    break;
+                case 'courses':
+                    loadCourses(page);
+                    break;
+                case 'activity':
+                    loadActivity(page);
+                    break;
+            }
+        }
+
+        // Utility functions
+        async function toggleUserStatus(userId, isActive) {
+            try {
+                const response = await fetch(`${API_BASE}/admin/update-user-status`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        is_active: isActive
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    loadUsers(currentPage.users);
+                } else {
+                    showError(data.message || 'Błąd podczas aktualizacji statusu użytkownika');
+                }
+            } catch (error) {
+                console.error('Toggle user status error:', error);
+                showError('Błąd połączenia z serwerem');
+            }
+        }
+
+        function editCourse(courseId) {
+            // Redirect to course edit page or open modal
+            window.open(`course-editor.html?id=${courseId}`, '_blank');
+        }
+
+        function showError(message) {
+            // You can implement a more sophisticated error display
+            alert(message);
+        }
+
+        // Search functionality with debounce
+        let searchTimeout;
+        document.addEventListener('input', function(e) {
+            if (e.target.classList.contains('search-input')) {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    if (currentSection === 'users') {
+                        loadUsers();
+                    } else if (currentSection === 'courses') {
+                        loadCourses();
+                    }
+                }, 300);
+            }
+        });
+    </script>
+</body>
+</html>
