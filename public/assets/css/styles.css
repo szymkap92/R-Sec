@@ -1567,6 +1567,10 @@ section h2 {
 		object-fit: cover;
 		border-radius: 15px;
 	}
+	
+	.member-image img[alt="Wojciech Bobak"] {
+		content: url("../images/team/118118Bobak-mobile.webp");
+	}
 
 	.member-info h3 {
 		font-size: 2rem;
@@ -1710,6 +1714,10 @@ section h2 {
 		height: 280px;
 		width: 200px;
 	}
+	
+	.member-image img[alt="Wojciech Bobak"] {
+		content: url("../images/team/118118Bobak-mobile.webp");
+	}
 
 	.member-info h3 {
 		font-size: 1.6rem;
@@ -1808,6 +1816,10 @@ section h2 {
 	.member-image img {
 		height: 250px;
 		width: 180px;
+	}
+	
+	.member-image img[alt="Wojciech Bobak"] {
+		content: url("../images/team/118118Bobak-mobile.webp");
 	}
 
 	.member-info h3 {
