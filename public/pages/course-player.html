@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>R-SEC Academy - Odtwarzacz kursu</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Varela+Round:wght@400&display=swap"
+        rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="stylesheet" href="../assets/css/course-player.css" />
+</head>
+<body>
+    <nav class="navbar course-navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="../assets/images/logos/logo.gif" alt="R-SEC Logo" />
+                <h2>R-SEC Academy</h2>
+            </div>
+            <div class="course-nav-center">
+                <h3 id="courseTitle">Podstawy Cyberbezpieczeństwa</h3>
+                <div class="course-progress-nav">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 25%"></div>
+                    </div>
+                    <span class="progress-text">Lekcja 3 z 12 (25%)</span>
+                </div>
+            </div>
+            <div class="course-nav-actions">
+                <button class="btn btn-secondary" onclick="window.location.href='platform-elearning.html'">
+                    ← Powrót do kursów
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="course-player-main">
+        <div class="course-layout">
+            <!-- Sidebar with lessons -->
+            <aside class="course-sidebar">
+                <div class="sidebar-header">
+                    <h4>📚 Plan kursu</h4>
+                    <button class="sidebar-toggle">▼</button>
+                </div>
+                <div class="lessons-list">
+                    <div class="lesson-group">
+                        <h5>Moduł 1: Wprowadzenie</h5>
+                        <div class="lesson-item completed">
+                            <span class="lesson-number">1</span>
+                            <div class="lesson-info">
+                                <h6>Czym jest cyberbezpieczeństwo?</h6>
+                                <span class="lesson-duration">15 min</span>
+                            </div>
+                            <span class="lesson-status">✓</span>
+                        </div>
+                        <div class="lesson-item completed">
+                            <span class="lesson-number">2</span>
+                            <div class="lesson-info">
+                                <h6>Rodzaje zagrożeń cybernetycznych</h6>
+                                <span class="lesson-duration">20 min</span>
+                            </div>
+                            <span class="lesson-status">✓</span>
+                        </div>
+                        <div class="lesson-item current">
+                            <span class="lesson-number">3</span>
+                            <div class="lesson-info">
+                                <h6>Podstawy ochrony danych</h6>
+                                <span class="lesson-duration">25 min</span>
+                            </div>
+                            <span class="lesson-status">▶</span>
+                        </div>
+                    </div>
+                    
+                    <div class="lesson-group">
+                        <h5>Moduł 2: Praktyczne zabezpieczenia</h5>
+                        <div class="lesson-item locked">
+                            <span class="lesson-number">4</span>
+                            <div class="lesson-info">
+                                <h6>Bezpieczne hasła</h6>
+                                <span class="lesson-duration">18 min</span>
+                            </div>
+                            <span class="lesson-status">🔒</span>
+                        </div>
+                        <div class="lesson-item locked">
+                            <span class="lesson-number">5</span>
+                            <div class="lesson-info">
+                                <h6>Uwierzytelnianie dwuskładnikowe</h6>
+                                <span class="lesson-duration">22 min</span>
+                            </div>
+                            <span class="lesson-status">🔒</span>
+                        </div>
+                    </div>
+                    
+                    <div class="lesson-group">
+                        <h5>Moduł 3: Zagrożenia sieciowe</h5>
+                        <div class="lesson-item locked">
+                            <span class="lesson-number">6</span>
+                            <div class="lesson-info">
+                                <h6>Phishing i socjotechnika</h6>
+                                <span class="lesson-duration">30 min</span>
+                            </div>
+                            <span class="lesson-status">🔒</span>
+                        </div>
+                        <div class="lesson-item locked">
+                            <span class="lesson-number">7</span>
+                            <div class="lesson-info">
+                                <h6>Malware i ransomware</h6>
+                                <span class="lesson-duration">28 min</span>
+                            </div>
+                            <span class="lesson-status">🔒</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main content area -->
+            <div class="course-content">
+                <!-- Video player area -->
+                <div class="video-container">
+                    <div class="video-placeholder">
+                        <div class="video-play-button">▶</div>
+                        <div class="video-info">
+                            <h3>Lekcja 3: Podstawy ochrony danych</h3>
+                            <p>Poznaj fundamentalne zasady ochrony danych osobowych i biznesowych</p>
+                        </div>
+                    </div>
+                    <div class="video-controls">
+                        <button class="control-btn play-btn">⏯️</button>
+                        <span class="time-display">05:32 / 25:00</span>
+                        <div class="video-progress">
+                            <div class="video-progress-bar">
+                                <div class="video-progress-fill" style="width: 22%"></div>
+                            </div>
+                        </div>
+                        <button class="control-btn speed-btn">1x</button>
+                        <button class="control-btn quality-btn">720p</button>
+                        <button class="control-btn fullscreen-btn">⛶</button>
+                    </div>
+                </div>
+
+                <!-- Lesson content -->
+                <div class="lesson-content">
+                    <div class="content-tabs">
+                        <button class="tab-btn active" data-tab="overview">📋 Przegląd</button>
+                        <button class="tab-btn" data-tab="materials">📄 Materiały</button>
+                        <button class="tab-btn" data-tab="quiz">❓ Quiz</button>
+                        <button class="tab-btn" data-tab="notes">📝 Notatki</button>
+                    </div>
+                    
+                    <div class="tab-content active" id="overview">
+                        <h4>Czego się nauczysz w tej lekcji:</h4>
+                        <ul class="learning-objectives">
+                            <li>✓ Podstawowe zasady RODO</li>
+                            <li>✓ Klasyfikacja danych według wrażliwości</li>
+                            <li>✓ Techniki szyfrowania danych</li>
+                            <li>✓ Polityki bezpieczeństwa w organizacji</li>
+                            <li>✓ Praktyczne narzędzia ochrony</li>
+                        </ul>
+                        
+                        <h4>Kluczowe punkty:</h4>
+                        <div class="key-points">
+                            <div class="key-point">
+                                <h5>🔐 Szyfrowanie</h5>
+                                <p>Podstawowe techniki szyfrowania danych w spoczynku i podczas transmisji</p>
+                            </div>
+                            <div class="key-point">
+                                <h5>📊 Klasyfikacja danych</h5>
+                                <p>Jak prawidłowo klasyfikować dane według poziomów wrażliwości</p>
+                            </div>
+                            <div class="key-point">
+                                <h5>📋 Polityki</h5>
+                                <p>Tworzenie i wdrażanie polityk bezpieczeństwa informacji</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="materials">
+                        <h4>Materiały do pobrania:</h4>
+                        <div class="materials-list">
+                            <a href="#" class="material-item">
+                                <div class="material-icon">📄</div>
+                                <div class="material-info">
+                                    <h5>Przewodnik RODO dla firm</h5>
+                                    <span>PDF • 2.5 MB</span>
+                                </div>
+                                <button class="btn btn-secondary btn-sm">Pobierz</button>
+                            </a>
+                            <a href="#" class="material-item">
+                                <div class="material-icon">📊</div>
+                                <div class="material-info">
+                                    <h5>Szablon klasyfikacji danych</h5>
+                                    <span>Excel • 450 KB</span>
+                                </div>
+                                <button class="btn btn-secondary btn-sm">Pobierz</button>
+                            </a>
+                            <a href="#" class="material-item">
+                                <div class="material-icon">🔗</div>
+                                <div class="material-info">
+                                    <h5>Przydatne linki</h5>
+                                    <span>Zasoby online</span>
+                                </div>
+                                <button class="btn btn-secondary btn-sm">Zobacz</button>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="quiz">
+                        <h4>Quiz sprawdzający:</h4>
+                        <div class="quiz-container">
+                            <div class="quiz-question">
+                                <h5>Pytanie 1 z 5:</h5>
+                                <p>Które z poniższych stwierdzeń najlepiej opisuje dane osobowe według RODO?</p>
+                                <div class="quiz-options">
+                                    <label class="quiz-option">
+                                        <input type="radio" name="q1" value="a">
+                                        <span>Tylko imię i nazwisko osoby</span>
+                                    </label>
+                                    <label class="quiz-option">
+                                        <input type="radio" name="q1" value="b">
+                                        <span>Wszelkie informacje umożliwiające identyfikację osoby</span>
+                                    </label>
+                                    <label class="quiz-option">
+                                        <input type="radio" name="q1" value="c">
+                                        <span>Tylko dane finansowe</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="quiz-actions">
+                                <button class="btn btn-primary">Sprawdź odpowiedź</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="notes">
+                        <h4>Twoje notatki:</h4>
+                        <div class="notes-container">
+                            <textarea class="notes-textarea" placeholder="Zapisz swoje notatki z tej lekcji...">05:32 - Ważne: RODO dotyczy wszystkich danych osobowych, nie tylko wrażliwych
+
+12:45 - Zasady klasyfikacji:
+- Publiczne
+- Wewnętrzne
+- Poufne
+- Ściśle tajne
+
+18:20 - Narzędzia szyfrowania:
+- AES-256 dla danych w spoczynku
+- TLS 1.3 dla transmisji</textarea>
+                            <div class="notes-actions">
+                                <button class="btn btn-secondary">Zapisz notatki</button>
+                                <button class="btn btn-primary">Eksportuj PDF</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation buttons -->
+                <div class="lesson-navigation">
+                    <button class="btn btn-secondary nav-btn">
+                        ← Poprzednia lekcja
+                    </button>
+                    <button class="btn btn-primary nav-btn">
+                        Następna lekcja →
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/course-player.js"></script>
+</body>
+</html>

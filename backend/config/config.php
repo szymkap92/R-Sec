@@ -21,7 +21,7 @@ date_default_timezone_set('Europe/Warsaw');
 // Application Constants
 define('APP_NAME', 'R-SEC Academy');
 define('APP_VERSION', '1.0.0');
-define('BASE_URL', 'http://localhost/RSec'); // Change in production
+define('BASE_URL', 'http://localhost/RSec/public'); // Change in production
 define('API_BASE_URL', BASE_URL . '/backend/api');
 define('UPLOAD_PATH', __DIR__ . '/../uploads/');
 define('UPLOAD_URL', BASE_URL . '/backend/uploads/');
