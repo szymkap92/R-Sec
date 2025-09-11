@@ -1,5 +1,61 @@
 /* E-Learning Platform Styles */
 
+/* Platform Navigation */
+.navbar .nav-container {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto auto;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.5rem 15px;
+}
+
+.navbar .logo h2 {
+    font-size: 1.2rem;
+}
+
+.navbar .nav-menu li a {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+}
+
+.navbar .language-switcher {
+    font-size: 0.8rem;
+}
+
+.navbar .user-actions {
+    display: flex;
+    gap: 0.3rem;
+}
+
+.navbar .user-actions .btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    min-width: auto;
+}
+
+/* Mobile responsive for platform navbar */
+@media (max-width: 1024px) {
+    .navbar .nav-container {
+        grid-template-columns: auto 1fr auto;
+        gap: 0.5rem;
+        padding: 0.5rem 10px;
+    }
+    
+    .navbar .user-actions {
+        display: none;
+    }
+    
+    .navbar .logo h2 {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar .nav-container {
+        padding: 0.5rem 8px;
+    }
+}
+
 /* Platform Hero */
 .platform-hero {
     background: var(--cyber-gradient);

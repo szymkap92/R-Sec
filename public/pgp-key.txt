@@ -1,0 +1,12 @@
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Comment: R-SEC Public Key
+Comment: Contact: biuro@r-sec.pl
+
+[Placeholder for R-SEC PGP Public Key]
+
+This is a placeholder file. 
+Replace with actual PGP public key when available.
+
+Contact R-SEC at biuro@r-sec.pl for the current public key.
+
+-----END PGP PUBLIC KEY BLOCK-----
