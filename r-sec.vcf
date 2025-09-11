@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Nazwisko;Imię;;;
+FN:Imię Nazwisko
+ORG:R-SEC
+TITLE:Stanowisko
+TEL;TYPE=CELL:+48 883 037 627
+EMAIL;TYPE=WORK:kontakt@r-sec.pl
+URL:https://r-sec.pl
+END:VCARD
