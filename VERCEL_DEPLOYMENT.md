@@ -6,8 +6,8 @@
 ```bash
 # Upewnij się że masz wszystkie pliki:
 - vercel.json (konfiguracja Vercel)
-- api/online-counter.js (Vercel Function)
-- assets/js/online-counter-simple.js (frontend)
+- api/online-counter.js (Vercel Function - backup)
+- assets/js/online-counter-vercel.js (frontend - AKTYWNY)
 ```
 
 ### 2. **Wdrożenie na Vercel**
@@ -24,22 +24,27 @@ vercel --prod
 2. Połącz repo z Vercel Dashboard
 3. Auto-deploy zostanie uruchomione
 
-## 📋 **Różne wersje licznika:**
+## 📋 **Obecna wersja licznika:**
 
-### **Wersja 1: Simple Counter (Aktualnie aktywna)**
-- ✅ **Działa na Vercel** - bez backend
-- ✅ **Symuluje realistyczne liczby** (2-19 osób)
-- ✅ **Dynamiczne na podstawie pory dnia**
-- ✅ **Zerowe zależności**
+### **Vercel Compatible Counter (Aktualnie aktywna)**
+- ✅ **Działa na Vercel/Netlify/GitHub Pages** - bez backend
+- ✅ **Realistyczne liczby** (4-15 osób w zależności od pory dnia)
+- ✅ **Smart timing** - dynamiczne zmiany co 25 sekund
+- ✅ **SessionStorage** zamiast localStorage
+- ✅ **Responsive design** - adaptuje się do urządzeń mobilnych
+- ✅ **Zero dependencies** - nie wymaga zewnętrznych bibliotek
+- ✅ **Cross-browser compatibility** - działa na starszych przeglądarkach
 
-### **Wersja 2: Vercel Functions**
+### **Backup wersje:**
+
+### **Wersja 2: Vercel Functions (Backup)**
 - 🔄 **Wymaga Vercel Functions**
 - 📁 Plik: `api/online-counter.js`
 - 🔧 Konfiguracja: `vercel.json`
 
-### **Wersja 3: Local Storage (Backup)**
-- 📁 Plik: `assets/js/online-counter-local.js`
-- 💾 Używa localStorage dla sesji
+### **Wersja 3: Real Sessions (Backup)**
+- 📁 Plik: `assets/js/online-counter-real.js`
+- 💾 Używa localStorage dla prawdziwych sesji
 - 🔄 Synchronizacja między tabami
 
 ## 🛠 **Zmiana wersji licznika:**
@@ -47,15 +52,20 @@ vercel --prod
 ### **Aby przełączyć na Vercel Functions:**
 ```bash
 # Zamień w wszystkich HTML:
-sed -i 's/online-counter-simple.js/online-counter.js/g' *.html
-sed -i 's/online-counter-simple.js/online-counter.js/g' pages/*/*.html
+find . -name "*.html" -exec sed -i 's/online-counter-vercel.js/online-counter.js/g' {} \;
 ```
 
-### **Aby przełączyć na Local Storage:**
+### **Aby przełączyć na Real Sessions:**
 ```bash
 # Zamień w wszystkich HTML:
-sed -i 's/online-counter-simple.js/online-counter-local.js/g' *.html
-sed -i 's/online-counter-simple.js/online-counter-local.js/g' pages/*/*.html
+find . -name "*.html" -exec sed -i 's/online-counter-vercel.js/online-counter-real.js/g' {} \;
+```
+
+### **Aby wrócić do Vercel Compatible:**
+```bash
+# Zamień w wszystkich HTML:
+find . -name "*.html" -exec sed -i 's/online-counter-real.js/online-counter-vercel.js/g' {} \;
+find . -name "*.html" -exec sed -i 's/online-counter.js/online-counter-vercel.js/g' {} \;
 ```
 
 ## 🧪 **Testowanie:**
@@ -63,12 +73,14 @@ sed -i 's/online-counter-simple.js/online-counter-local.js/g' pages/*/*.html
 ### **Lokalne testowanie:**
 - Otwórz `test-counter.html` w przeglądarce
 - Sprawdź czy licznik się pojawia
-- Powinna być widoczna liczba 2-19
+- Powinna być widoczna liczba 4-15 (zależna od pory dnia)
+- Funkcja debug: w konsoli wpisz `debugVercelCounter()`
 
 ### **Testowanie na Vercel:**
 - Po deploy sprawdź dowolną stronę
 - Licznik powinien pojawić się obok przełącznika języka
-- Liczba powinna aktualizować się co 30 sekund
+- Liczba powinna aktualizować się co 20 sekund
+- Na urządzeniach mobilnych tekst "online" się chowa
 
 ## 🎯 **Oczekiwany rezultat:**
 

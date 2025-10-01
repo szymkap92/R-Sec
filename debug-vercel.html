@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Vercel Counter - R-SEC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: white;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .debug-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .status-box {
+            background: #2d2d2d;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border-left: 4px solid #00ff88;
+        }
+        .error-box {
+            border-left-color: #ff4444;
+        }
+        .warning-box {
+            border-left-color: #ffaa00;
+        }
+        .navbar-test {
+            background: #2d2d2d;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .lang-link {
+            color: #ccc;
+            text-decoration: none;
+            padding: 0.3rem 0.6rem;
+        }
+        .lang-link.active {
+            color: #00ff88;
+        }
+        .lang-separator {
+            color: #666;
+        }
+        .console-output {
+            background: #000;
+            padding: 1rem;
+            height: 300px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 0.9rem;
+            border: 1px solid #333;
+            border-radius: 4px;
+        }
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .test-item {
+            background: #333;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        .btn {
+            background: #00ff88;
+            color: #000;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 0.25rem;
+        }
+        .btn:hover {
+            background: #00cc6a;
+        }
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        .info-table th,
+        .info-table td {
+            padding: 0.5rem;
+            border: 1px solid #444;
+            text-align: left;
+        }
+        .info-table th {
+            background: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="debug-container">
+        <h1>🔧 Debug Vercel Counter</h1>
+        <p>Ta strona pomoże zdiagnozować problemy z licznikiem online na serwerze Vercel.</p>
+
+        <!-- Test Navbar -->
+        <div class="navbar-test">
+            <div>🔍 R-SEC Debug</div>
+            <div class="language-switcher">
+                <a href="#" class="lang-link active">PL</a>
+                <span class="lang-separator">|</span>
+                <a href="#" class="lang-link">EN</a>
+            </div>
+        </div>
+
+        <!-- Status Boxes -->
+        <div id="status-container">
+            <div class="status-box">
+                <h3>⏳ Sprawdzanie stanu...</h3>
+                <p>Ładowanie diagnostyki...</p>
+            </div>
+        </div>
+
+        <!-- Test Grid -->
+        <div class="test-grid">
+            <div class="test-item">
+                <h3>🧪 Testy automatyczne</h3>
+                <button class="btn" onclick="runAllTests()">Uruchom wszystkie testy</button>
+                <button class="btn" onclick="testPaths()">Test ścieżek</button>
+                <button class="btn" onclick="testStorage()">Test storage</button>
+                <button class="btn" onclick="testBrowser()">Test przeglądarki</button>
+            </div>
+
+            <div class="test-item">
+                <h3>📊 Informacje systemowe</h3>
+                <table class="info-table" id="system-info">
+                    <tr><th>Parametr</th><th>Wartość</th></tr>
+                </table>
+            </div>
+
+            <div class="test-item">
+                <h3>🎯 Licznik</h3>
+                <p>Aktualna liczba online: <span id="current-count">-</span></p>
+                <p>Status: <span id="counter-status">⏳ Sprawdzanie...</span></p>
+                <button class="btn" onclick="forceUpdate()">Wymuś aktualizację</button>
+                <button class="btn" onclick="resetCounter()">Reset licznika</button>
+            </div>
+
+            <div class="test-item">
+                <h3>🔍 Element DOM</h3>
+                <p>Licznik w DOM: <span id="dom-status">⏳ Sprawdzanie...</span></p>
+                <p>CSS załadowany: <span id="css-status">⏳ Sprawdzanie...</span></p>
+                <button class="btn" onclick="inspectDOM()">Sprawdź DOM</button>
+            </div>
+        </div>
+
+        <!-- Console Output -->
+        <div class="status-box">
+            <h3>📋 Logi konsoli</h3>
+            <div class="console-output" id="console-log"></div>
+            <button class="btn" onclick="clearConsole()">Wyczyść logi</button>
+            <button class="btn" onclick="exportLogs()">Eksportuj logi</button>
+        </div>
+    </div>
+
+    <script>
+        // Console override dla debugging
+        const originalLog = console.log;
+        const originalWarn = console.warn;
+        const originalError = console.error;
+        const logs = [];
+
+        function addLog(message, type = 'log') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = { timestamp, message, type };
+            logs.push(logEntry);
+            
+            const logDiv = document.getElementById('console-log');
+            const color = {
+                'log': '#00ff88',
+                'warn': '#ffaa00',
+                'error': '#ff4444'
+            }[type] || '#ccc';
+            
+            logDiv.innerHTML += `<div style="color: ${color};">[${timestamp}] ${message}</div>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+
+        console.log = function(...args) {
+            addLog(args.join(' '), 'log');
+            originalLog.apply(console, args);
+        };
+
+        console.warn = function(...args) {
+            addLog(args.join(' '), 'warn');
+            originalWarn.apply(console, args);
+        };
+
+        console.error = function(...args) {
+            addLog(args.join(' '), 'error');
+            originalError.apply(console, args);
+        };
+
+        // System info
+        function updateSystemInfo() {
+            const info = {
+                'User Agent': navigator.userAgent,
+                'URL': window.location.href,
+                'Protocol': window.location.protocol,
+                'Host': window.location.host,
+                'Path': window.location.pathname,
+                'Timestamp': new Date().toLocaleString(),
+                'Screen': `${screen.width}x${screen.height}`,
+                'Window': `${window.innerWidth}x${window.innerHeight}`,
+                'Language': navigator.language,
+                'Storage Support': 'sessionStorage' in window ? '✅' : '❌',
+                'Local Storage': 'localStorage' in window ? '✅' : '❌'
+            };
+
+            const table = document.getElementById('system-info');
+            table.innerHTML = '<tr><th>Parametr</th><th>Wartość</th></tr>';
+            
+            for (const [key, value] of Object.entries(info)) {
+                table.innerHTML += `<tr><td>${key}</td><td>${value}</td></tr>`;
+            }
+        }
+
+        // Status update
+        function updateStatus() {
+            const statusContainer = document.getElementById('status-container');
+            statusContainer.innerHTML = '';
+
+            // Check if counter is loaded
+            if (window.vercelOnlineCounter) {
+                statusContainer.innerHTML += `
+                    <div class="status-box">
+                        <h3>✅ Licznik załadowany</h3>
+                        <p>VercelOnlineCounter jest aktywny</p>
+                    </div>
+                `;
+                document.getElementById('counter-status').textContent = '✅ Aktywny';
+            } else {
+                statusContainer.innerHTML += `
+                    <div class="status-box error-box">
+                        <h3>❌ Licznik nie załadowany</h3>
+                        <p>VercelOnlineCounter nie jest dostępny</p>
+                    </div>
+                `;
+                document.getElementById('counter-status').textContent = '❌ Nieaktywny';
+            }
+
+            // Check DOM element
+            const counterElement = document.querySelector('.online-counter');
+            if (counterElement) {
+                statusContainer.innerHTML += `
+                    <div class="status-box">
+                        <h3>✅ Element DOM istnieje</h3>
+                        <p>HTML: ${counterElement.outerHTML}</p>
+                    </div>
+                `;
+                document.getElementById('dom-status').textContent = '✅ Znaleziono';
+            } else {
+                statusContainer.innerHTML += `
+                    <div class="status-box warning-box">
+                        <h3>⚠️ Element DOM nie znaleziony</h3>
+                        <p>Sprawdź czy language-switcher istnieje</p>
+                    </div>
+                `;
+                document.getElementById('dom-status').textContent = '❌ Nie znaleziono';
+            }
+
+            // Update current count
+            if (window.vercelOnlineCounter) {
+                document.getElementById('current-count').textContent = 
+                    window.vercelOnlineCounter.getCurrentCount();
+            }
+        }
+
+        // Test functions
+        function runAllTests() {
+            console.log('=== URUCHAMIANIE WSZYSTKICH TESTÓW ===');
+            testPaths();
+            testStorage();
+            testBrowser();
+            console.log('=== TESTY ZAKOŃCZONE ===');
+        }
+
+        function testPaths() {
+            console.log('TEST: Sprawdzanie ścieżek do plików...');
+            
+            // Test CSS
+            const cssLinks = document.querySelectorAll('link[rel="stylesheet"]');
+            cssLinks.forEach((link, i) => {
+                console.log(`CSS ${i + 1}: ${link.href}`);
+            });
+
+            // Test JS
+            const scripts = document.querySelectorAll('script[src]');
+            scripts.forEach((script, i) => {
+                console.log(`JS ${i + 1}: ${script.src}`);
+            });
+        }
+
+        function testStorage() {
+            console.log('TEST: Sprawdzanie storage...');
+            
+            try {
+                sessionStorage.setItem('test', 'value');
+                const test = sessionStorage.getItem('test');
+                sessionStorage.removeItem('test');
+                console.log('✅ SessionStorage działa');
+            } catch (e) {
+                console.error('❌ SessionStorage błąd:', e.message);
+            }
+
+            try {
+                localStorage.setItem('test', 'value');
+                const test = localStorage.getItem('test');
+                localStorage.removeItem('test');
+                console.log('✅ LocalStorage działa');
+            } catch (e) {
+                console.error('❌ LocalStorage błąd:', e.message);
+            }
+        }
+
+        function testBrowser() {
+            console.log('TEST: Sprawdzanie kompatybilności przeglądarki...');
+            
+            const features = {
+                'BroadcastChannel': 'BroadcastChannel' in window,
+                'sessionStorage': 'sessionStorage' in window,
+                'localStorage': 'localStorage' in window,
+                'fetch': 'fetch' in window,
+                'Promise': 'Promise' in window,
+                'querySelector': 'querySelector' in document
+            };
+
+            for (const [feature, supported] of Object.entries(features)) {
+                console.log(`${supported ? '✅' : '❌'} ${feature}`);
+            }
+        }
+
+        function forceUpdate() {
+            if (window.vercelOnlineCounter) {
+                window.vercelOnlineCounter.updateDisplay();
+                console.log('Wymuszono aktualizację licznika');
+            } else {
+                console.warn('Licznik nie jest dostępny');
+            }
+            updateStatus();
+        }
+
+        function resetCounter() {
+            if (window.vercelOnlineCounter) {
+                window.vercelOnlineCounter.baseCount = window.vercelOnlineCounter.getBaseCount();
+                window.vercelOnlineCounter.updateDisplay();
+                console.log('Reset licznika');
+            } else {
+                console.warn('Licznik nie jest dostępny');
+            }
+            updateStatus();
+        }
+
+        function inspectDOM() {
+            console.log('=== INSPEKCJA DOM ===');
+            
+            const languageSwitchers = document.querySelectorAll('.language-switcher');
+            console.log(`Znaleziono ${languageSwitchers.length} language-switcher(s)`);
+            
+            languageSwitchers.forEach((switcher, i) => {
+                console.log(`Language switcher ${i + 1}:`, switcher.outerHTML);
+            });
+
+            const counters = document.querySelectorAll('.online-counter');
+            console.log(`Znaleziono ${counters.length} licznik(ów)`);
+            
+            counters.forEach((counter, i) => {
+                console.log(`Licznik ${i + 1}:`, counter.outerHTML);
+            });
+        }
+
+        function clearConsole() {
+            document.getElementById('console-log').innerHTML = '';
+            logs.length = 0;
+        }
+
+        function exportLogs() {
+            const logText = logs.map(log => 
+                `[${log.timestamp}] ${log.type.toUpperCase()}: ${log.message}`
+            ).join('\n');
+            
+            const blob = new Blob([logText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `vercel-debug-${new Date().toISOString().slice(0, 19)}.log`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DEBUG: Strona załadowana');
+            updateSystemInfo();
+            
+            // Wait for counter to load
+            setTimeout(() => {
+                updateStatus();
+                runAllTests();
+                
+                // Auto-refresh status every 10 seconds
+                setInterval(updateStatus, 10000);
+            }, 2000);
+        });
+    </script>
+
+    <!-- Load the counter script -->
+    <script src="assets/js/online-counter-vercel.js"></script>
+</body>
+</html>

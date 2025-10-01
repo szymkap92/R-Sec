@@ -89,16 +89,17 @@
         console.log('Oczekiwanie na załadowanie skryptu online-counter.js...');
     </script>
     
-    <script src="assets/js/online-counter-real.js"></script>
+    <script src="assets/js/online-counter-vercel.js"></script>
     
     <script>
         // Test po załadowaniu
         setTimeout(() => {
-            console.log('Sprawdzanie czy OnlineCounter został zainicjalizowany...');
-            if (window.OnlineCounter) {
-                console.log('✓ OnlineCounter jest dostępny');
+            console.log('Sprawdzanie czy VercelOnlineCounter został zainicjalizowany...');
+            if (window.vercelOnlineCounter) {
+                console.log('✓ VercelOnlineCounter jest dostępny');
+                console.log('Aktualna liczba:', window.vercelOnlineCounter.getCurrentCount());
             } else {
-                console.warn('✗ OnlineCounter nie jest dostępny');
+                console.warn('✗ VercelOnlineCounter nie jest dostępny');
             }
             
             // Sprawdź czy element licznika został utworzony
