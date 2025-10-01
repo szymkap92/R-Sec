@@ -1,18 +1,17 @@
 /**
- * Online Counter System
- * Pokazuje liczbę osób obecnie przeglądających stronę
+ * Online Counter - Local/Static Version
+ * Symuluje licznik online dla stron statycznych
  */
 
-class OnlineCounter {
+class OnlineCounterLocal {
     constructor() {
         this.sessionId = this.getOrCreateSessionId();
-        this.apiUrl = '/api/online-counter'; // Vercel functions format
-        this.fallbackMode = false;
+        this.activeUsers = new Set();
         this.heartbeatInterval = 15000; // 15 sekund
         this.updateInterval = 20000; // 20 sekund
         this.heartbeatTimer = null;
         this.updateTimer = null;
-        this.localSessions = new Set();
+        this.lastHeartbeat = Date.now();
         
         this.init();
     }
@@ -28,7 +27,9 @@ class OnlineCounter {
     
     init() {
         this.createCounterElement();
-        this.sendHeartbeat(); // Pierwsze wysłanie
+        this.loadStoredSessions();
+        this.addCurrentSession();
+        this.updateDisplay();
         this.startHeartbeat();
         this.startUpdates();
         
@@ -37,24 +38,24 @@ class OnlineCounter {
             this.cleanup();
         });
         
-        // Cleanup przy ukryciu strony (tab switching)
+        // Obsługa visibility change
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
                 this.stopTimers();
             } else {
+                this.loadStoredSessions();
+                this.addCurrentSession();
                 this.startHeartbeat();
                 this.startUpdates();
-                this.sendHeartbeat();
+                this.updateDisplay();
             }
         });
     }
     
     createCounterElement() {
-        // Znajdź element language-switcher we wszystkich możliwych lokalizacjach
         const languageSwitchers = document.querySelectorAll('.language-switcher');
         
-        languageSwitchers.forEach((switcher, index) => {
-            // Utwórz element licznika tylko jeśli jeszcze nie istnieje
+        languageSwitchers.forEach((switcher) => {
             if (!switcher.querySelector('.online-counter')) {
                 const counterElement = document.createElement('div');
                 counterElement.className = 'online-counter';
@@ -64,73 +65,96 @@ class OnlineCounter {
                     <span class="online-text">online</span>
                 `;
                 
-                // Dodaj przed language-switcher
                 switcher.parentNode.insertBefore(counterElement, switcher);
             }
         });
     }
     
-    async sendHeartbeat() {
-        if (this.fallbackMode) {
-            this.sendLocalHeartbeat();
-            return;
-        }
-        
+    loadStoredSessions() {
         try {
-            const response = await fetch(this.apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    sessionId: this.sessionId
-                })
-            });
-            
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}`);
-            }
-            
-            const data = await response.json();
-            if (data.success) {
-                this.updateDisplay(data.onlineCount);
+            const stored = localStorage.getItem('rsec_online_sessions');
+            if (stored) {
+                const sessions = JSON.parse(stored);
+                const currentTime = Date.now();
+                const timeout = 30000; // 30 sekund
+                
+                // Wyczyść stare sesje
+                const activeSessions = {};
+                for (const [sessionId, session] of Object.entries(sessions)) {
+                    if ((currentTime - session.lastSeen) < timeout) {
+                        activeSessions[sessionId] = session;
+                    }
+                }
+                
+                this.activeUsers = new Set(Object.keys(activeSessions));
+                localStorage.setItem('rsec_online_sessions', JSON.stringify(activeSessions));
             } else {
-                throw new Error('API returned error');
+                this.activeUsers = new Set();
             }
         } catch (error) {
-            console.warn('Online counter API failed, switching to local mode:', error);
-            this.fallbackMode = true;
-            this.sendLocalHeartbeat();
+            console.warn('Error loading sessions:', error);
+            this.activeUsers = new Set();
         }
     }
     
-    async getOnlineCount() {
+    addCurrentSession() {
+        this.activeUsers.add(this.sessionId);
+        this.saveSession();
+    }
+    
+    saveSession() {
         try {
-            const response = await fetch(this.apiUrl + '?t=' + Date.now());
-            const data = await response.json();
-            if (data.success) {
-                this.updateDisplay(data.onlineCount);
-            }
+            const stored = localStorage.getItem('rsec_online_sessions');
+            const sessions = stored ? JSON.parse(stored) : {};
+            
+            sessions[this.sessionId] = {
+                lastSeen: Date.now(),
+                userAgent: navigator.userAgent
+            };
+            
+            localStorage.setItem('rsec_online_sessions', JSON.stringify(sessions));
         } catch (error) {
-            console.warn('Online counter update failed:', error);
+            console.warn('Error saving session:', error);
         }
     }
     
-    updateDisplay(count) {
+    updateDisplay() {
+        // Dodaj trochę realistycznej symulacji
+        const baseCount = this.activeUsers.size;
+        const randomVariation = Math.floor(Math.random() * 5) + 1; // 1-5 dodatkowych użytkowników
+        const simulatedCount = Math.max(1, baseCount + randomVariation);
+        
         const counters = document.querySelectorAll('.online-count');
         const indicators = document.querySelectorAll('.online-indicator');
         
         counters.forEach(counter => {
-            counter.textContent = count;
+            counter.textContent = simulatedCount;
         });
         
-        // Animacja wskaźnika (pulsowanie)
+        // Animacja wskaźnika
         indicators.forEach(indicator => {
             indicator.style.animation = 'none';
             setTimeout(() => {
                 indicator.style.animation = 'pulse 2s infinite';
             }, 100);
         });
+    }
+    
+    sendHeartbeat() {
+        this.lastHeartbeat = Date.now();
+        this.loadStoredSessions();
+        this.addCurrentSession();
+        this.updateDisplay();
+        
+        // Symuluj broadcast do innych okien/tabów
+        try {
+            const event = new CustomEvent('rsec-heartbeat', {
+                detail: { sessionId: this.sessionId, timestamp: this.lastHeartbeat }
+            });
+            window.dispatchEvent(event);
+        } catch (error) {
+            // Ignore errors
+        }
     }
     
     startHeartbeat() {
@@ -147,7 +171,8 @@ class OnlineCounter {
             clearInterval(this.updateTimer);
         }
         this.updateTimer = setInterval(() => {
-            this.getOnlineCount();
+            this.loadStoredSessions();
+            this.updateDisplay();
         }, this.updateInterval);
     }
     
@@ -162,77 +187,23 @@ class OnlineCounter {
         }
     }
     
-    // === FALLBACK LOCAL METHODS ===
-    sendLocalHeartbeat() {
-        this.loadLocalSessions();
-        this.localSessions.add(this.sessionId);
-        this.saveLocalSession();
-        
-        // Symuluj realistyczną liczbę
-        const baseCount = this.localSessions.size;
-        const randomAdd = Math.floor(Math.random() * 8) + 2; // 2-9 dodatkowych
-        this.updateDisplay(baseCount + randomAdd);
-    }
-    
-    loadLocalSessions() {
+    cleanup() {
+        this.stopTimers();
+        // Usuń własną sesję przy zamykaniu
         try {
             const stored = localStorage.getItem('rsec_online_sessions');
             if (stored) {
                 const sessions = JSON.parse(stored);
-                const currentTime = Date.now();
-                const timeout = 30000; // 30 sekund
-                
-                const activeSessions = {};
-                for (const [sessionId, session] of Object.entries(sessions)) {
-                    if ((currentTime - session.lastSeen) < timeout) {
-                        activeSessions[sessionId] = session;
-                    }
-                }
-                
-                this.localSessions = new Set(Object.keys(activeSessions));
-                localStorage.setItem('rsec_online_sessions', JSON.stringify(activeSessions));
+                delete sessions[this.sessionId];
+                localStorage.setItem('rsec_online_sessions', JSON.stringify(sessions));
             }
         } catch (error) {
-            console.warn('Error loading local sessions:', error);
-        }
-    }
-    
-    saveLocalSession() {
-        try {
-            const stored = localStorage.getItem('rsec_online_sessions');
-            const sessions = stored ? JSON.parse(stored) : {};
-            
-            sessions[this.sessionId] = {
-                lastSeen: Date.now(),
-                userAgent: navigator.userAgent
-            };
-            
-            localStorage.setItem('rsec_online_sessions', JSON.stringify(sessions));
-        } catch (error) {
-            console.warn('Error saving local session:', error);
-        }
-    }
-    
-    cleanup() {
-        this.stopTimers();
-        
-        // Cleanup local session
-        if (this.fallbackMode) {
-            try {
-                const stored = localStorage.getItem('rsec_online_sessions');
-                if (stored) {
-                    const sessions = JSON.parse(stored);
-                    delete sessions[this.sessionId];
-                    localStorage.setItem('rsec_online_sessions', JSON.stringify(sessions));
-                }
-            } catch (error) {
-                // Ignore cleanup errors
-            }
+            // Ignore cleanup errors
         }
     }
 }
 
-// Style CSS dla licznika
+// Style CSS dla licznika (takie same jak w wersji oryginalnej)
 const onlineCounterStyles = `
 .online-counter {
     display: flex;
@@ -282,7 +253,6 @@ const onlineCounterStyles = `
     }
 }
 
-/* Responsywność */
 @media (max-width: 768px) {
     .online-counter {
         font-size: 0.75rem;
@@ -295,7 +265,6 @@ const onlineCounterStyles = `
     }
 }
 
-/* Dark mode support */
 @media (prefers-color-scheme: dark) {
     .online-counter {
         background: rgba(0, 0, 0, 0.3);
@@ -304,22 +273,20 @@ const onlineCounterStyles = `
 }
 `;
 
-// Dodaj style do strony
 function addOnlineCounterStyles() {
     const styleElement = document.createElement('style');
     styleElement.textContent = onlineCounterStyles;
     document.head.appendChild(styleElement);
 }
 
-// Inicjalizacja po załadowaniu DOM
+// Inicjalizacja
 document.addEventListener('DOMContentLoaded', () => {
     addOnlineCounterStyles();
     
-    // Małe opóźnienie żeby navbar się załadował
     setTimeout(() => {
-        new OnlineCounter();
+        new OnlineCounterLocal();
     }, 500);
 });
 
-// Export dla użycia w innych miejscach
-window.OnlineCounter = OnlineCounter;
+// Export
+window.OnlineCounterLocal = OnlineCounterLocal;
