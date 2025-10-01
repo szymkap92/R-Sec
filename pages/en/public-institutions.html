@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Google Tag Manager -->
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-M6WQBBH8');</script>
+		<!-- End Google Tag Manager -->
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Public Institutions - R-SEC</title>
+		<meta name="description" content="Cybersecurity services for public institutions - R-SEC" />
+		
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Varela+Round:wght@400&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="../../assets/css/styles.css" />
+		<style>
+			.sector-hero {
+				background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+				padding: 100px 0 80px;
+				text-align: center;
+				color: white;
+			}
+			
+			.sector-container {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 60px 20px;
+			}
+			
+			.back-button {
+				display: inline-block;
+				margin: 40px 0;
+				padding: 12px 24px;
+				background: #00ff88;
+				color: #1a1a1a;
+				text-decoration: none;
+				border-radius: 8px;
+				font-weight: 600;
+				transition: all 0.3s;
+			}
+			
+			.back-button:hover {
+				background: #00cc6a;
+				transform: translateY(-2px);
+			}
+			
+			.carousel-container {
+				position: relative;
+				max-width: 800px;
+				margin: 40px auto;
+				background: white;
+				border-radius: 15px;
+				box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+				overflow: hidden;
+			}
+			
+			.carousel-wrapper {
+				position: relative;
+				width: 100%;
+				height: 400px;
+				overflow: hidden;
+			}
+			
+			.carousel-slide {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				opacity: 0;
+				transition: opacity 0.5s ease-in-out;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 40px;
+			}
+			
+			.carousel-slide.active {
+				opacity: 1;
+			}
+			
+			.recommendation-image {
+				max-width: 250px;
+				max-height: 200px;
+				width: 250px;
+				height: 200px;
+				object-fit: contain;
+				border-radius: 10px;
+				margin-bottom: 20px;
+			}
+			
+			.recommendation-content {
+				text-align: center;
+				max-width: 500px;
+			}
+			
+			.recommendation-title {
+				font-size: 1.4rem;
+				font-weight: 600;
+				color: #1a1a1a;
+				margin: 15px 0 10px;
+			}
+			
+			.recommendation-description {
+				font-size: 1rem;
+				color: #555;
+				line-height: 1.5;
+				margin: 0;
+			}
+			
+			.carousel-nav {
+				position: absolute;
+				bottom: 20px;
+				left: 50%;
+				transform: translateX(-50%);
+				display: flex;
+				gap: 10px;
+			}
+			
+			.carousel-dot {
+				width: 12px;
+				height: 12px;
+				border-radius: 50%;
+				background: rgba(255,255,255,0.5);
+				cursor: pointer;
+				transition: background 0.3s;
+			}
+			
+			.carousel-dot.active {
+				background: #00ff88;
+			}
+			
+			.carousel-arrow {
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				width: 50px;
+				height: 50px;
+				background: rgba(0,0,0,0.7);
+				color: white;
+				border: none;
+				border-radius: 50%;
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 20px;
+				transition: background 0.3s;
+			}
+			
+			.carousel-arrow:hover {
+				background: rgba(0,0,0,0.9);
+			}
+			
+			.carousel-arrow.prev {
+				left: 20px;
+			}
+			
+			.carousel-arrow.next {
+				right: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M6WQBBH8"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+		<nav class="navbar">
+			<div class="nav-container">
+				<div class="logo">
+					<img src="../../assets/images/logos/logo.gif" alt="R-SEC Logo" title="R-SEC - Computer Networking & Security" />
+					
+				</div>
+				<ul class="nav-menu">
+					<li><a href="index-en.html#home" class="nav-link">Home</a></li>
+					<li><a href="index-en.html#about" class="nav-link">About</a></li>
+					<li><a href="index-en.html#services" class="nav-link">Services</a></li>
+					<li><a href="index-en.html#audits" class="nav-link">Audits</a></li>
+					<li><a href="index-en.html#automation" class="nav-link">Automation</a></li>
+					<li><a href="index-en.html#forensics" class="nav-link">Forensics</a></li>
+					<li class="dropdown">
+						<a href="#" class="nav-link dropdown-toggle">Development</a>
+						<ul class="dropdown-menu">
+							<li><a href="shop-en.html">Shop</a></li>
+							<li><a href="training.html">Training</a></li>
+						</ul>
+					</li>
+					<li><a href="index-en.html#team" class="nav-link">Team</a></li>
+					<li><a href="index-en.html#clients" class="nav-link">Clients</a></li>
+					<li><a href="index-en.html#contact" class="nav-link">Contact</a></li>
+				</ul>
+				<div class="language-switcher">
+					<a href="../../index.html" class="lang-link">PL</a>
+					<span class="lang-separator">|</span>
+					<a href="index-en.html" class="lang-link active">EN</a>
+				</div>
+				<div class="hamburger">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+			</div>
+		</nav>
+
+		<section class="sector-hero">
+			<div class="container">
+				<h1>🏛️ Public Institutions</h1>
+				<p>IT security for government offices and local government units</p>
+			</div>
+		</section>
+
+		<div class="sector-container">
+			<a href="index-en.html#clients" class="back-button">← Back to clients section</a>
+			
+			<div class="container">
+				<h2>Our Experience</h2>
+				<p>We cooperate with local government units, state offices and public institutions in the field of citizen data security and e-administration systems. We ensure compliance with GDPR requirements and security standards for the public sector.</p>
+				
+				<h3>Client Recommendations</h3>
+				<div class="carousel-container">
+					<div class="carousel-wrapper">
+						<div class="carousel-slide active">
+							<div class="recommendation-content">
+								<img src="../../assets/images/rekomendacje/7p.webp" alt="7P Recommendation" class="recommendation-image" />
+								<h3 class="recommendation-title">7P – Marketing Agency</h3>
+								<p class="recommendation-description">We are a team of young, ambitious and creative people united by a passion for creating and helping others discover the potential of their business.</p>
+							</div>
+						</div>
+						<div class="carousel-slide">
+							<div class="recommendation-content">
+								<img src="../../assets/images/rekomendacje/Re-Bau.webp" alt="Re-Bau Recommendation" class="recommendation-image" />
+								<h3 class="recommendation-title">Re-Bau – Construction Company</h3>
+								<p class="recommendation-description">RE-Bau is a modern construction company founded in 1996, operating both in the Polish market and (in previous years) in many European countries.</p>
+							</div>
+						</div>
+						<div class="carousel-slide">
+							<div class="recommendation-content">
+								<img src="../../assets/images/rekomendacje/Solcam.webp" alt="Solcam Recommendation" class="recommendation-image" />
+								<h3 class="recommendation-title">Solcam – Energy</h3>
+								<p class="recommendation-description">Clean electrical energy generated by photovoltaic installations</p>
+							</div>
+						</div>
+						<div class="carousel-slide">
+							<div class="recommendation-content">
+								<img src="../../assets/images/rekomendacje/Stac.webp" alt="Stac Recommendation" class="recommendation-image" />
+								<h3 class="recommendation-title">StaC OHS</h3>
+								<p class="recommendation-description">Training and Service in the field of OHS and First Aid</p>
+							</div>
+						</div>
+						<div class="carousel-slide">
+							<div class="recommendation-content">
+								<img src="../../assets/images/rekomendacje/Stormshield.webp" alt="Stormshield Recommendation" class="recommendation-image" />
+								<h3 class="recommendation-title">Stormshield – IT Company</h3>
+								<p class="recommendation-description">European manufacturer of UTM and Next Gen Firewall solutions. R-SEC is an Authorized Sales Partner of DAGMA in the field of Stormshield solutions sales.</p>
+							</div>
+						</div>
+						<div class="carousel-slide">
+							<div class="recommendation-content">
+								<img src="../../assets/images/rekomendacje/adcolors.webp" alt="AdColors Recommendation" class="recommendation-image" />
+								<h3 class="recommendation-title">Ad-Colors ADVERTISING HOUSE</h3>
+								<p class="recommendation-description">Promotion of your company in the hands of professionals</p>
+							</div>
+						</div>
+						<div class="carousel-slide">
+							<div class="recommendation-content">
+								<img src="../../assets/images/rekomendacje/agramon.webp" alt="Agramon Recommendation" class="recommendation-image" />
+								<h3 class="recommendation-title">Agramon TRAINING</h3>
+								<p class="recommendation-description">Training and Advisory Center Ltd.</p>
+							</div>
+						</div>
+						<div class="carousel-slide">
+							<div class="recommendation-content">
+								<img src="../../assets/images/rekomendacje/eset-logo.webp" alt="ESET Recommendation" class="recommendation-image" />
+								<h3 class="recommendation-title">ESET – Antivirus Solutions</h3>
+								<p class="recommendation-description">We are a global company dealing with digital security, protecting millions of customers and hundreds of thousands of companies worldwide. R-SEC is an Authorized Sales Partner of DAGMA in the field of ESET solutions sales.</p>
+							</div>
+						</div>
+						<div class="carousel-slide">
+							<div class="recommendation-content">
+								<img src="../../assets/images/rekomendacje/eventun.webp" alt="Eventun Recommendation" class="recommendation-image" />
+								<h3 class="recommendation-title">Eventun – Development Company</h3>
+								<p class="recommendation-description">We specialize in organizing training, conferences and consulting in the field of personal and business development.</p>
+							</div>
+						</div>
+						<div class="carousel-slide">
+							<div class="recommendation-content">
+								<img src="../../assets/images/rekomendacje/ibik-logo.webp" alt="IBIK Recommendation" class="recommendation-image" />
+								<h3 class="recommendation-title">Institute of Research and Commercialization WSB-NLU</h3>
+								<p class="recommendation-description">Within the scope of its tasks, the Institute cooperates on an ongoing basis with entities from various industries, including the largest companies in the IT sector: Comarch, Microsoft, Oracle.</p>
+							</div>
+						</div>
+						<div class="carousel-slide">
+							<div class="recommendation-content">
+								<img src="../../assets/images/rekomendacje/logo-1702547600.svg" alt="Logo Recommendation" class="recommendation-image" />
+								<h3 class="recommendation-title">Eltrox SHOP</h3>
+								<p class="recommendation-description">Our greatest asset is following the modern world of technology. We are open to all technical innovations, we go with the spirit of the times</p>
+							</div>
+						</div>
+						<div class="carousel-slide">
+							<div class="recommendation-content">
+								<img src="../../assets/images/rekomendacje/logo-signati.svg" alt="Signati Recommendation" class="recommendation-image" />
+								<h3 class="recommendation-title">Signati – IT Company</h3>
+								<p class="recommendation-description">We are a company specializing in providing IT products and services.</p>
+							</div>
+						</div>
+						<div class="carousel-slide">
+							<div class="recommendation-content">
+								<img src="../../assets/images/rekomendacje/logo-spatium.webp" alt="Spatium Recommendation" class="recommendation-image" />
+								<h3 class="recommendation-title">Spatium – Development Company</h3>
+								<p class="recommendation-description">We specialize in organizing training, conferences and consulting in the field of personal and business development.</p>
+							</div>
+						</div>
+						<div class="carousel-slide">
+							<div class="recommendation-content">
+								<img src="../../assets/images/rekomendacje/lol-3.webp" alt="LOL Recommendation" class="recommendation-image" />
+								<h3 class="recommendation-title">Signa CUSTOMS AGENCY</h3>
+								<p class="recommendation-description">We are a company with over fifteen years of experience in international trade logistics</p>
+							</div>
+						</div>
+						<div class="carousel-slide">
+							<div class="recommendation-content">
+								<img src="../../assets/images/rekomendacje/nowysacz-herb.webp" alt="Nowy Sącz Recommendation" class="recommendation-image" />
+								<h3 class="recommendation-title">Nowy Sącz City Hall</h3>
+								<p class="recommendation-description">Nowy Sącz City Office</p>
+							</div>
+						</div>
+						<div class="carousel-slide">
+							<div class="recommendation-content">
+								<img src="../../assets/images/rekomendacje/tatra-logho-1.webp" alt="Tatra Recommendation" class="recommendation-image" />
+								<h3 class="recommendation-title">TatraHause Novum - Wooden Houses</h3>
+								<p class="recommendation-description">let us fulfill your dream of a new house, garage and gazebo</p>
+							</div>
+						</div>
+						<div class="carousel-slide">
+							<div class="recommendation-content">
+								<img src="../../assets/images/rekomendacje/wsb-nlu-kp.webp" alt="WSB Recommendation" class="recommendation-image" />
+								<h3 class="recommendation-title">WSB-NLU – Dr. Krzysztof Pawłowski</h3>
+								<p class="recommendation-description">President of the University of Business – National-Louis University in Nowy Sącz. Polish physicist, politician, senator of the 1st and 2nd terms, entrepreneur.</p>
+							</div>
+						</div>
+					</div>
+					
+					<button class="carousel-arrow prev" onclick="changeSlide(-1)">‹</button>
+					<button class="carousel-arrow next" onclick="changeSlide(1)">›</button>
+					
+					<div class="carousel-nav">
+						<div class="carousel-dot active" onclick="currentSlide(1)"></div>
+						<div class="carousel-dot" onclick="currentSlide(2)"></div>
+						<div class="carousel-dot" onclick="currentSlide(3)"></div>
+						<div class="carousel-dot" onclick="currentSlide(4)"></div>
+						<div class="carousel-dot" onclick="currentSlide(5)"></div>
+						<div class="carousel-dot" onclick="currentSlide(6)"></div>
+						<div class="carousel-dot" onclick="currentSlide(7)"></div>
+						<div class="carousel-dot" onclick="currentSlide(8)"></div>
+						<div class="carousel-dot" onclick="currentSlide(9)"></div>
+						<div class="carousel-dot" onclick="currentSlide(10)"></div>
+						<div class="carousel-dot" onclick="currentSlide(11)"></div>
+						<div class="carousel-dot" onclick="currentSlide(12)"></div>
+						<div class="carousel-dot" onclick="currentSlide(13)"></div>
+						<div class="carousel-dot" onclick="currentSlide(14)"></div>
+						<div class="carousel-dot" onclick="currentSlide(15)"></div>
+						<div class="carousel-dot" onclick="currentSlide(16)"></div>
+						<div class="carousel-dot" onclick="currentSlide(17)"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../assets/js/script.js"></script>
+		<script src="../../assets/js/online-counter.js"></script>
+		<script>
+			let slideIndex = 1;
+			const totalSlides = 17;
+
+			function changeSlide(n) {
+				showSlide(slideIndex += n);
+			}
+
+			function currentSlide(n) {
+				showSlide(slideIndex = n);
+			}
+
+			function showSlide(n) {
+				const slides = document.querySelectorAll('.carousel-slide');
+				const dots = document.querySelectorAll('.carousel-dot');
+				
+				if (n > totalSlides) { slideIndex = 1; }
+				if (n < 1) { slideIndex = totalSlides; }
+				
+				slides.forEach(slide => slide.classList.remove('active'));
+				dots.forEach(dot => dot.classList.remove('active'));
+				
+				slides[slideIndex - 1].classList.add('active');
+				dots[slideIndex - 1].classList.add('active');
+			}
+
+			// Auto-advance slides every 5 seconds
+			setInterval(() => {
+				changeSlide(1);
+			}, 5000);
+		</script>
+	</body>
+</html>

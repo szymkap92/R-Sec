@@ -1,0 +1,13 @@
+# Włącz mod_rewrite
+RewriteEngine On
+
+# (opcjonalnie) wymuś HTTPS
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# Przekieruj /en i /en/... na wersję PL
+RewriteRule ^en/?$ / [R=301,L]
+RewriteRule ^en/(.*)$ /$1 [R=301,L]
+
+# Ustal domyślne pliki startowe
+DirectoryIndex index.html index.php

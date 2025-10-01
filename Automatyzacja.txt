@@ -1,0 +1,104 @@
+Struktura podstrony – Oferta Automatyzacji Zadań
+1. Nagłówek / Hero Section
+
+Tytuł: „Zautomatyzuj swój biznes – oszczędzaj czas i pieniądze”
+
+Krótki opis: „Wdrażamy inteligentne rozwiązania, które eliminują powtarzalne zadania, zwiększają efektywność i pozwalają Ci skupić się na tym, co naprawdę ważne.”
+
+CTA: „Umów darmową konsultację”
+
+2. Dlaczego automatyzacja?
+
+Blok korzyści w formie ikon + opis:
+
+Oszczędność czasu – nawet kilkanaście godzin tygodniowo mniej rutynowych obowiązków
+
+Mniejsze koszty – mniej pracy ręcznej, mniej błędów
+
+Większa efektywność zespołu – skupienie się na priorytetach
+
+Skalowalność biznesu – firma rośnie bez zatrudniania dodatkowych osób
+
+3. Nasze usługi
+
+Podział na kategorie, które klient łatwo zrozumie:
+
+Automatyzacja biura i pracy codziennej
+
+Automatyczne raporty, podsumowania i zestawienia
+
+Integracje kalendarzy, przypomnienia, zarządzanie spotkaniami
+
+Obsługa e-maili (filtry, sortowanie, automatyczne odpowiedzi)
+
+Automatyzacja procesów biznesowych
+
+Automatyczne fakturowanie i obieg dokumentów
+
+CRM i obsługa klienta (np. follow-up mailowy, przypomnienia)
+
+Tworzenie przepływów pracy między systemami (np. ERP → CRM → Excel)
+
+Automatyzacja marketingu
+
+Publikacje w social mediach według harmonogramu
+
+Kampanie e-mail / SMS automatycznie dopasowane do klienta
+
+Integracje sklepów internetowych (powiadomienia o zakupach, status zamówienia)
+
+Automatyzacja z użyciem AI
+
+Boty do obsługi klienta (Messenger, WhatsApp, strona WWW)
+
+Generowanie treści (opisy produktów, posty, raporty)
+
+Analiza danych i prognozowanie trendów
+
+4. Jak działamy (proces współpracy)
+
+Analiza – rozmawiamy z Tobą i sprawdzamy, co można zautomatyzować
+
+Propozycja rozwiązań – wybieramy najlepsze narzędzia i procesy
+
+Wdrożenie – konfigurujemy automatyzacje i testujemy
+
+Wsparcie – szkolimy Twój zespół i pomagamy w utrzymaniu
+
+5. Pakiety / Wycena
+
+Pakiet Start – proste automatyzacje codzienne (od 1000 zł jednorazowo)
+
+Pakiet Biznes – automatyzacja wybranych procesów firmowych (od 3000 zł)
+
+Pakiet Premium – pełna analiza i kompleksowe wdrożenie automatyzacji w firmie (indywidualna wycena)
+
+6. Przykłady wdrożeń (Case Studies)
+
+Sklep internetowy: automatyczne faktury + maile do klientów → oszczędność 15h miesięcznie
+
+Mała firma usługowa: automatyczne przypomnienia SMS o wizytach → mniej nieobecności klientów
+
+Biuro: raporty Excel generowane co tydzień bez udziału pracownika → 5h tygodniowo oszczędności
+
+7. Referencje / Opinie
+
+Cytaty klientów: „Dzięki automatyzacji oszczędzamy 10 godzin tygodniowo”
+
+Logo firm, które skorzystały
+
+8. FAQ
+
+Czy muszę mieć wiedzę techniczną?
+
+Ile trwa wdrożenie?
+
+Czy można zacząć od małego projektu i później rozwijać?
+
+Czy oferujecie wsparcie po wdrożeniu?
+
+9. Call to Action (na dole strony)
+
+Przycisk: „Umów darmową konsultację”
+
+Tekst motywujący: „Pokażemy Ci, jak w ciągu tygodnia odciążyć Twój biznes od rutynowych zadań.”

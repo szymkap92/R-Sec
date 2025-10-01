@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Licznika Online</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: white;
+            padding: 20px;
+        }
+        .navbar-test {
+            background: #2d2d2d;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .test-info {
+            background: #333;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Licznika Osób Online</h1>
+    
+    <div class="navbar-test">
+        <div>Logo R-SEC</div>
+        <div class="language-switcher">
+            <a href="#" class="lang-link active">PL</a>
+            <span class="lang-separator">|</span>
+            <a href="#" class="lang-link">EN</a>
+        </div>
+    </div>
+    
+    <div class="test-info">
+        <h3>Test funkcjonalności licznika:</h3>
+        <ul>
+            <li>Licznik powinien pojawić się po lewej stronie przełącznika języka</li>
+            <li>Powinien pokazywać zielony wskaźnik pulsujący</li>
+            <li>Liczba powinna aktualizować się co 20 sekund</li>
+            <li>Wysyłane są heartbeat co 15 sekund</li>
+            <li>Po 30 sekundach bez aktywności sesja jest usuwana</li>
+        </ul>
+    </div>
+
+    <div class="test-info">
+        <h3>Console Log:</h3>
+        <div id="console-log" style="background: #000; padding: 1rem; height: 200px; overflow-y: auto; font-family: monospace;"></div>
+    </div>
+
+    <script>
+        // Override console.log to show in page
+        const originalLog = console.log;
+        const originalWarn = console.warn;
+        const logDiv = document.getElementById('console-log');
+        
+        function addLog(message, type = 'log') {
+            const timestamp = new Date().toLocaleTimeString();
+            const color = type === 'warn' ? '#ff9800' : '#00ff88';
+            logDiv.innerHTML += `<div style="color: ${color};">[${timestamp}] ${message}</div>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+        
+        console.log = function(...args) {
+            addLog(args.join(' '), 'log');
+            originalLog.apply(console, args);
+        };
+        
+        console.warn = function(...args) {
+            addLog(args.join(' '), 'warn');
+            originalWarn.apply(console, args);
+        };
+        
+        // Log initial info
+        console.log('Test strony licznika online uruchomiony');
+        console.log('Oczekiwanie na załadowanie skryptu online-counter.js...');
+    </script>
+    
+    <script src="assets/js/online-counter.js"></script>
+    
+    <script>
+        // Test po załadowaniu
+        setTimeout(() => {
+            console.log('Sprawdzanie czy OnlineCounter został zainicjalizowany...');
+            if (window.OnlineCounter) {
+                console.log('✓ OnlineCounter jest dostępny');
+            } else {
+                console.warn('✗ OnlineCounter nie jest dostępny');
+            }
+            
+            // Sprawdź czy element licznika został utworzony
+            const counter = document.querySelector('.online-counter');
+            if (counter) {
+                console.log('✓ Element licznika został utworzony');
+                console.log('HTML licznika:', counter.outerHTML);
+            } else {
+                console.warn('✗ Element licznika nie został utworzony');
+            }
+        }, 2000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://r-sec.pl/sitemap.xml
+
+# Disallow sensitive directories
+Disallow: /backend/
+Disallow: /config/
+Disallow: /database/
+Disallow: /src/
+Disallow: /docs/technical/
+Disallow: *.php
+Disallow: /admin
+Disallow: /login
+Disallow: /register
+
+# Allow public assets
+Allow: /public/
+Allow: /assets/
+Allow: *.css
+Allow: *.js
+Allow: *.png
+Allow: *.jpg
+Allow: *.gif
+Allow: *.webp
+Allow: *.svg
+Allow: *.ico
+
+# Crawl delay
+Crawl-delay: 1

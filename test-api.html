@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API Licznika</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: white;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-section {
+            background: #333;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        button {
+            background: #00ff88;
+            color: #1a1a1a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #00cc6a;
+        }
+        #response {
+            background: #000;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test API Licznika Online</h1>
+    
+    <div class="test-section">
+        <h3>Test endpointów API:</h3>
+        <button onclick="testGet()">GET - Pobierz licznik</button>
+        <button onclick="testPost()">POST - Wyślij heartbeat</button>
+        <button onclick="testMultipleSessions()">Testuj multiple sesje</button>
+        <button onclick="clearResponse()">Wyczyść odpowiedzi</button>
+        
+        <div id="response"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Informacje:</h3>
+        <ul>
+            <li>API endpoint: <code>api/online-counter.php</code></li>
+            <li>GET - pobiera aktualną liczbę osób online</li>
+            <li>POST - wysyła heartbeat dla sesji</li>
+            <li>Timeout sesji: 30 sekund</li>
+            <li>Format danych: JSON</li>
+        </ul>
+    </div>
+
+    <script>
+        const responseDiv = document.getElementById('response');
+        
+        function addResponse(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            responseDiv.textContent += `[${timestamp}] ${message}\n`;
+            responseDiv.scrollTop = responseDiv.scrollHeight;
+        }
+        
+        function clearResponse() {
+            responseDiv.textContent = '';
+        }
+        
+        async function testGet() {
+            try {
+                addResponse('🔄 Testowanie GET request...');
+                const response = await fetch('api/online-counter.php');
+                const data = await response.json();
+                addResponse('✓ GET Response:');
+                addResponse(JSON.stringify(data, null, 2));
+            } catch (error) {
+                addResponse('✗ GET Error: ' + error.message);
+            }
+        }
+        
+        async function testPost() {
+            try {
+                const sessionId = 'test_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
+                addResponse(`🔄 Testowanie POST request z sessionId: ${sessionId}`);
+                
+                const response = await fetch('api/online-counter.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        sessionId: sessionId
+                    })
+                });
+                
+                const data = await response.json();
+                addResponse('✓ POST Response:');
+                addResponse(JSON.stringify(data, null, 2));
+            } catch (error) {
+                addResponse('✗ POST Error: ' + error.message);
+            }
+        }
+        
+        async function testMultipleSessions() {
+            addResponse('🔄 Testowanie wielu sesji...');
+            
+            // Utwórz 3 różne sesje
+            for (let i = 1; i <= 3; i++) {
+                try {
+                    const sessionId = `multi_test_${i}_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`;
+                    
+                    const response = await fetch('api/online-counter.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            sessionId: sessionId
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    addResponse(`✓ Sesja ${i} - Online count: ${data.onlineCount}`);
+                    
+                    // Krótkie opóźnienie między request
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                } catch (error) {
+                    addResponse(`✗ Sesja ${i} Error: ${error.message}`);
+                }
+            }
+            
+            // Sprawdź finalny wynik
+            setTimeout(async () => {
+                try {
+                    const response = await fetch('api/online-counter.php');
+                    const data = await response.json();
+                    addResponse(`📊 Finalna liczba osób online: ${data.onlineCount}`);
+                } catch (error) {
+                    addResponse('✗ Final check error: ' + error.message);
+                }
+            }, 500);
+        }
+        
+        // Auto test po załadowaniu
+        setTimeout(() => {
+            addResponse('🚀 Auto-test uruchomiony');
+            testGet();
+        }, 1000);
+    </script>
+</body>
+</html>
